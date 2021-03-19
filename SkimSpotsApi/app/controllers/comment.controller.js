@@ -85,13 +85,13 @@ exports.getUserComments = (req, res) => {
 exports.getPlaceComments = (req, res) => {
     var placeID = req.params.id;
 
-    Comment.findAll( {where: { exhibitId: placeID }, include: [{model: User, as: "user"}],  order: [ [ 'createdAt', 'DESC' ]] })
+    Comment.findAll( {where: { placeId: placeID }, include: [{model: User, as: "user"}],  order: [ [ 'createdAt', 'DESC' ]] })
         .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
-                message: err.message || "Some error occurred while retrieving exhibit comments."
+                message: err.message || "Some error occurred while retrieving place comments."
             });
         });
 };
