@@ -2,13 +2,15 @@ import * as React from "react";
 import { StyleSheet } from "react-native";
 import { Text, View } from "../components/Themed";
 
-export default function SettingsScreen() {
+const SettingsScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Settings</Text>
     </View>
   );
-}
+};
+
+export default SettingsScreen;
 
 const styles = StyleSheet.create({
   container: {

@@ -18,7 +18,7 @@ import ScanScreen from "../screens/ScanScreen";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
-export default function BottomTabNavigator() {
+const BottomTabNavigator = () => {
   const colorScheme = useColorScheme();
 
   return (
@@ -66,18 +66,20 @@ export default function BottomTabNavigator() {
       />
     </BottomTab.Navigator>
   );
-}
+};
 
-function TabBarIcon(props: {
+export default BottomTabNavigator;
+
+const TabBarIcon = (props: {
   name: React.ComponentProps<typeof Ionicons>["name"];
   color: string;
-}) {
+}) => {
   return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
-}
+};
 
 const ProfileStack = createStackNavigator<ProfileParamList>();
 
-function ProfileNavigator() {
+const ProfileNavigator = () => {
   return (
     <ProfileStack.Navigator>
       <ProfileStack.Screen
@@ -87,11 +89,11 @@ function ProfileNavigator() {
       />
     </ProfileStack.Navigator>
   );
-}
+};
 
 const HomeStack = createStackNavigator<HomeParamList>();
 
-function HomeNavigator() {
+const HomeNavigator = () => {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen
@@ -101,11 +103,11 @@ function HomeNavigator() {
       />
     </HomeStack.Navigator>
   );
-}
+};
 
 const ScanStack = createStackNavigator<ScanParamList>();
 
-function ScanNavigator() {
+const ScanNavigator = () => {
   return (
     <ScanStack.Navigator>
       <ScanStack.Screen
@@ -115,11 +117,11 @@ function ScanNavigator() {
       />
     </ScanStack.Navigator>
   );
-}
+};
 
 const SettingsStack = createStackNavigator<SettingsParamList>();
 
-function SettingsNavigator() {
+const SettingsNavigator = () => {
   return (
     <SettingsStack.Navigator>
       <SettingsStack.Screen
@@ -129,4 +131,4 @@ function SettingsNavigator() {
       />
     </SettingsStack.Navigator>
   );
-}
+};

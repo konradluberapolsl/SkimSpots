@@ -2,13 +2,15 @@ import * as React from "react";
 import { StyleSheet } from "react-native";
 import { Text, View } from "../components/Themed";
 
-export default function ProfileScreen() {
+const ProfileScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Profile</Text>
     </View>
   );
-}
+};
+
+export default ProfileScreen;
 
 const styles = StyleSheet.create({
   container: {

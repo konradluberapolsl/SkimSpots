@@ -2,13 +2,15 @@ import * as React from "react";
 import { StyleSheet } from "react-native";
 import { Text, View } from "../components/Themed";
 
-export default function HomeScreen() {
+const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Home</Text>
     </View>
   );
-}
+};
+
+export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
