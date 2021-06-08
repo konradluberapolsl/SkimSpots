@@ -15,6 +15,8 @@ import {
 } from "../types";
 import SettingsScreen from "../screens/SettingsScreen";
 import ScanScreen from "../screens/ScanScreen";
+import { Text, TouchableOpacity } from "react-native";
+import { AuthContext } from "../context/AuthContext";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -80,12 +82,27 @@ const TabBarIcon = (props: {
 const ProfileStack = createStackNavigator<ProfileParamList>();
 
 const ProfileNavigator = () => {
+  const { logout } = React.useContext(AuthContext);
+
   return (
     <ProfileStack.Navigator>
       <ProfileStack.Screen
         name="ProfileScreen"
         component={ProfileScreen}
-        options={{ headerTitle: "Profile Title" }}
+        options={{
+          headerTitle: "Profile Title",
+          headerRight: () => {
+            return (
+              <TouchableOpacity
+                onPress={() => {
+                  logout();
+                }}
+              >
+                <Text>LOGOUT</Text>
+              </TouchableOpacity>
+            );
+          },
+        }}
       />
     </ProfileStack.Navigator>
   );

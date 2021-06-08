@@ -4,12 +4,9 @@ import { Text, View } from "../components/Themed";
 import { AuthContext } from "../context/AuthContext";
 
 const ProfileScreen = () => {
-  const { logout } = React.useContext(AuthContext);
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Profile</Text>
-      <Button title={"logout"} onPress={() => logout()} />
     </View>
   );
 };
