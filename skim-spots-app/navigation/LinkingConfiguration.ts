@@ -28,6 +28,7 @@ export default {
           },
         },
       },
+      WelcomeScreen: 'welcome',
       NotFound: '*',
     },
   },

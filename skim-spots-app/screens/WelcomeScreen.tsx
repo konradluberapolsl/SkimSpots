@@ -3,18 +3,17 @@ import { Button, StyleSheet } from "react-native";
 import { Text, View } from "../components/Themed";
 import { AuthContext } from "../context/AuthContext";
 
-const ProfileScreen = () => {
-  const { logout } = React.useContext(AuthContext);
-
+const WelcomeScreen = () => {
+  const { login } = React.useContext(AuthContext);
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Profile</Text>
-      <Button title={"logout"} onPress={() => logout()} />
+      <Text style={styles.title}>Welcome</Text>
+      <Button title={"Go!"} onPress={() => login()} />
     </View>
   );
 };
 
-export default ProfileScreen;
+export default WelcomeScreen;
 
 const styles = StyleSheet.create({
   container: {

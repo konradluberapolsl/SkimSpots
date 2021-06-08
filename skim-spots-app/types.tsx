@@ -25,3 +25,7 @@ export type ScanParamList = {
 export type SettingsParamList = {
   SettingsScreen: undefined;
 };
+
+export type AuthenticationParamList = {
+  WelcomeScreen: undefined;
+};
