@@ -9,13 +9,13 @@ module.exports = app => {
     router.get("/", place.getAll);
 
     // Retrieve place titles
-    router.get("/alltitles", place.getPlaceAllTitles);
+    router.get("/alltitles", place.getPlaceAllNames);
 
     // Retrieve place with id
     router.get("/:id",  place.getPlaceByID);
 
     // Retrieve place with title
-    router.get("/title/:title",  place.getPlaceByTitle);
+    router.get("/title/:title",  place.getPlaceByName);
 
     // Update a place with id
     router.put("/:id", place.update);
