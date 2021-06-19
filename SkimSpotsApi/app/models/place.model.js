@@ -6,11 +6,11 @@ module.exports = (sequelize, Sequelize) => {
         welcomeText: {
             type: Sequelize.STRING
         },
-        description: {
+        information: {
             type: Sequelize.TEXT
         },
         points: {
-            type: Sequelize.INT
+            type: Sequelize.INTEGER
         }
     });
 
