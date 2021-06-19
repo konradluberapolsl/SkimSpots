@@ -32,7 +32,7 @@ services:
     restart: always
 
   server:
-    build: ./server
+    build: ./SkimSpotsApi
     container_name: node_server_container_skimspots
     depends_on:
       - mysql-db
@@ -42,7 +42,7 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - ./server:/app
+      - ./SkimSpotsApi:/app
     links:
       - mysql-db
     command: npm start
