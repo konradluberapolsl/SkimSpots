@@ -9,10 +9,10 @@ module.exports = app => {
     router.get("/", userPlace.getAll);
 
     // Retrieve user place by user id
-    router.get("/place/:id", userPlace.getByUserID);
+    router.get("/user/:id", userPlace.getByUserID);
 
     // Retrieve user place by place id
-    router.get("/:id",  userPlace.getByPlaceID);
+    router.get("/place/:id",  userPlace.getByPlaceID);
 
     // Update a user place with id
     router.put("/:id", userPlace.update);
