@@ -9,13 +9,13 @@ module.exports = app => {
     router.get("/", userPoints.getAll);
 
     // Retrieve user points by user id
-    router.get("/place/:id", userPoints.getByUserID);
+    router.get("/user/:id", userPoints.getByUserID);
 
     // Update a user place with id
     router.put("/:id", userPoints.update);
 
     // Update a user place with user id
-    router.put("/:id", userPoints.updateByUserID);
+    router.put("/user/:id", userPoints.updateByUserID);
 
     // Delete a user points with id
     router.delete("/:id", userPoints.delete);
