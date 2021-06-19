@@ -43,6 +43,7 @@ services:
       - 8000:8000
     volumes:
       - ./SkimSpotsApi:/app
+      - .\Places:/Places
     links:
       - mysql-db
     command: npm start
