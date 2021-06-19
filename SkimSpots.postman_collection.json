@@ -1,0 +1,681 @@
+{
+	"info": {
+		"_postman_id": "22805d59-cb66-4885-9914-b59c9ba56a87",
+		"name": "SkimSpots",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "GetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/user/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Konrad",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Konrad",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/user/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Places",
+			"item": [
+				{
+					"name": "Post",
+					"item": [
+						{
+							"name": "Park",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Park Chrobrego",
+											"type": "text"
+										},
+										{
+											"key": "welcomeText",
+											"value": "Znajdujesz się w najlepszym parku w mieście, teraz idź usiądź sobie gdzieś i poczilluj.",
+											"type": "text"
+										},
+										{
+											"key": "information",
+											"value": "Park Chrobrego to bezapelacyjnie najlepszy park w Gliwicach, dlaczego? No a dlatego że jest obok Politechniki a co za tym idzie akademików, jest tu mnóstwo atrakcji możesz pograć w discgolfa, wejść na pająka, w zimie zjechać z górki na sankach czy nawet przykafarzyć na siłce. Jedyny minus to płynący obok ściek zwany Kłodnicą – śmierdzi. P.S. Nigdy nie dostałem tu mandatu za picie a to duży plus.",
+											"type": "text"
+										},
+										{
+											"key": "points",
+											"value": "100",
+											"type": "text"
+										},
+										{
+											"key": "authorId",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/place/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"place",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Gliwice Arena",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Arena Gliwice",
+											"type": "text"
+										},
+										{
+											"key": "welcomeText",
+											"value": "Ładny budynek, w nocy fajnie świeci.",
+											"type": "text"
+										},
+										{
+											"key": "information",
+											"value": "Arena to wizytówka miasta, bardzo łanie zaprojektowana hala, w której dzieją się jakieś rzeczy. Polecam oglądać w nocy bo wtedy się ładnie świeci. Kiedyś pod areną były organizowane igry i było fajnie a teraz wiadomo, pandemia",
+											"type": "text"
+										},
+										{
+											"key": "points",
+											"value": "100",
+											"type": "text"
+										},
+										{
+											"key": "authorId",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/place/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"place",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Disc Golf",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "DiscGolf w parku Chrobrego",
+											"type": "text"
+										},
+										{
+											"key": "welcomeText",
+											"value": "Super gra, zagraj se, serio.",
+											"type": "text"
+										},
+										{
+											"key": "information",
+											"value": "DiscGolf to niszowa gra której zasady opierają się na golfie, nie będę ich tłumaczył bo masz obok tablicę na której jest wszystko. Jednak z grubsza musisz trafić dyskiem do kosza w jak najmniejszej liczbie ruchów. Polecam tą grę bo sprzęt jest tani (na początek może być nawet frisbee), zabawa świetna i zawsze możesz powiedzieć znajomym że idziesz na golfa. ",
+											"type": "text"
+										},
+										{
+											"key": "points",
+											"value": "300",
+											"type": "text"
+										},
+										{
+											"key": "authorId",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/place/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"place",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Burned Car",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Spalone auto obok CNT",
+											"type": "text"
+										},
+										{
+											"key": "welcomeText",
+											"value": "Gratulacje znalazłeś legendarne miejsce. Często stoi tu spalony samochód 😊.",
+											"type": "text"
+										},
+										{
+											"key": "information",
+											"value": "Na parkingu obok CNT zawsze stoi jakieś spalone auto najpierw stała spalona Corsa później spalone Putno. Teraz akurat nic nie stoi, ale natura nie znosi próżni i na pewno zaraz coś się pojawi. Daj znać w komentarzach czy coś stoi.",
+											"type": "text"
+										},
+										{
+											"key": "points",
+											"value": "500",
+											"type": "text"
+										},
+										{
+											"key": "authorId",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/place/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"place",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Hill",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Górka w parku Chrobrego",
+											"type": "text"
+										},
+										{
+											"key": "welcomeText",
+											"value": "Zjedź sobie z niej, fajna jest.",
+											"type": "text"
+										},
+										{
+											"key": "information",
+											"value": "Generalnie górka jaka jest każdy widzi, nie za wysoka nie za stroma ale daje kupę frajdy. Możesz z niej zjechać na milion sposobów: po zjeżdżalni, w zimie na sankach, na rowerze, na tyłku czy nawet sturlać się. W zimie dodatkowo możesz socjalizować się z innymi ludźmi jeżdżącymi na sankach, zimno Ci nie będzie. Polecam.",
+											"type": "text"
+										},
+										{
+											"key": "points",
+											"value": "300",
+											"type": "text"
+										},
+										{
+											"key": "authorId",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/place/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"place",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Lion",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Lew czuwający",
+											"type": "text"
+										},
+										{
+											"key": "welcomeText",
+											"value": "Fajny taki, czuwający.",
+											"type": "text"
+										},
+										{
+											"key": "information",
+											"value": "Co tu dużo gadać to rzeźba lwa który czuwa. Rozkoszuj się sztuką i poczytaj sobie o nim więcej. W tajemnicy zdradzę Ci, że to nie jedyny lew w Gliwicach, pójdź na spacer i poszukaj innych.",
+											"type": "text"
+										},
+										{
+											"key": "points",
+											"value": "300",
+											"type": "text"
+										},
+										{
+											"key": "authorId",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/place/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"place",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "MS",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Wydział Matematyki Stosowanej POLSL",
+											"type": "text"
+										},
+										{
+											"key": "welcomeText",
+											"value": "Budynek szpetny ale ludzie piękni.",
+											"type": "text"
+										},
+										{
+											"key": "information",
+											"value": "Najlepszy wydział na Politechnice z tym nie ma dyskusji. Jeżeli chcesz studiować matematykę albo informatykę to jest najlepsze miejsce. Nie oceniaj książki po okładce, co z tego, że jest brzydki?",
+											"type": "text"
+										},
+										{
+											"key": "points",
+											"value": "300",
+											"type": "text"
+										},
+										{
+											"key": "authorId",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/place/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"place",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Tank",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Czołg T-34",
+											"type": "text"
+										},
+										{
+											"key": "welcomeText",
+											"value": "Popatrz jaką ma lufę.",
+											"type": "text"
+										},
+										{
+											"key": "information",
+											"value": "Fajny czołg stoi sobie koło prokuratury więc jak będziesz sprzedawał ziomka to możesz sobie popatrzeć. W nocy możesz spróbować na niego wejść. Generalnie warto wziąć pod uwagę jego historię, kiedyś jeździł na wojnie i strzelał a teraz stoi sobie i wygląda.",
+											"type": "text"
+										},
+										{
+											"key": "points",
+											"value": "100",
+											"type": "text"
+										},
+										{
+											"key": "authorId",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/place/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"place",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Spider",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Pająk w parku Chrobrego",
+											"type": "text"
+										},
+										{
+											"key": "welcomeText",
+											"value": "W ciągu dnia dzieci się bawią, w nocy „dorośli” tworzą historię.",
+											"type": "text"
+										},
+										{
+											"key": "information",
+											"value": "Wydawałoby się, że jest to atrakcja dla dzieci jednak w nocy pająk zamienia się w centrum imprezy. Podobno w trakcie imprezy wejście na pająka jest trudniejsze od wejścia na K2, zimą. Jest to miejsce bardzo fajne do posiedzenia, pogadania i wypicia piwka jednak apeluję o ostrożność, jeśli nie czujesz się na siłach, że wejdziesz, odpuść. Na górze też nie przesadzajcie, żeby bezpiecznie zejść. A i jeszcze jedno dbajcie o pająka, nie niszczcie go a śmieci zabierzcie ze sobą.",
+											"type": "text"
+										},
+										{
+											"key": "points",
+											"value": "100",
+											"type": "text"
+										},
+										{
+											"key": "authorId",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/place/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"place",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GetById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/place/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"place",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetByName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/place/?name=Park Chrobrego",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"place",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Park Chrobrego"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "AddComment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "content",
+									"value": "Fajne miejsce",
+									"type": "text"
+								},
+								{
+									"key": "userId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "placeId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/comment/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"comment",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCommentsForPlace",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/comment/place/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"comment",
+								"place",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
