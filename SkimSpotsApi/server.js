@@ -17,12 +17,15 @@ app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
+app.use('/img', express.static('../Places/'));
+
 // call sysc()
 const db = require("./app/models");
 
 // sync all models with db -> auto generate tables
-db.sequelize.sync({force: true});
-
+db.sequelize.sync();
+//db.sequelize.sync({force: true});
 // user routes
 require("./app/routes/user.routes.js")(app);
 
