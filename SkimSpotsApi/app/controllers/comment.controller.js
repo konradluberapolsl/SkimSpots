@@ -1,6 +1,6 @@
 const db = require("../models");
 const Comment = db.comments;
-const User = db.users;
+const User = db.user;
 const Op = db.Sequelize.Op;
 
 
@@ -19,7 +19,7 @@ exports.create = (req, res) => {
     const comment = {
         content: req.body.content,
         userId: req.body.userId,
-        exhibitId: req.body.exhibitId,
+        placeId: req.body.placeId,
     }
 
     Comment.create(comment)
@@ -57,7 +57,7 @@ exports.getAll = (req, res) => {
 exports.getCommentByID = (req, res) => {
     var commentID = req.params.id;
 
-    Comment.findAll({ where: { ID: commentID } })
+    Comment.findByPk(commentID)
         .then(data => {
             res.send(data);
         })
@@ -85,7 +85,7 @@ exports.getUserComments = (req, res) => {
 exports.getPlaceComments = (req, res) => {
     var placeID = req.params.id;
 
-    Comment.findAll( {where: { placeId: placeID }, include: [{model: User, as: "user"}],  order: [ [ 'createdAt', 'DESC' ]] })
+    Comment.findAll( {where: { placeId: placeID }})
         .then(data => {
             res.send(data);
         })
