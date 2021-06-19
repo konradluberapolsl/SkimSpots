@@ -17,7 +17,7 @@ exports.create = (req, res) => {
         information: req.body.information,
         pathToImages: req.body.pathToImages,
         authorId: req.body.authorId,
-        points: req.body.points
+        points: req.body.points,
     }
 
     Place.create(place)
