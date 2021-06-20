@@ -1,0 +1,10 @@
+<svg id="Icon_open-person" data-name="Icon open-person" xmlns="http://www.w3.org/2000/svg" width="27.276" height="27.276" viewBox="0 0 27.276 27.276">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <path id="Icon_open-person-2" data-name="Icon open-person" class="cls-1" d="M13.638,0C9.888,0,6.819,3.819,6.819,8.524s3.069,8.524,6.819,8.524,6.819-3.819,6.819-8.524S17.389,0,13.638,0ZM6.512,17.048A6.826,6.826,0,0,0,0,23.867v3.41H27.276v-3.41a6.8,6.8,0,0,0-6.512-6.819,9.576,9.576,0,0,1-7.126,3.41A9.576,9.576,0,0,1,6.512,17.048Z" transform="translate(0)"/>
+</svg>
