@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "22805d59-cb66-4885-9914-b59c9ba56a87",
+		"_postman_id": "cff08c5e-6d3e-4c76-9f78-3d7503329a6f",
 		"name": "SkimSpots",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -121,6 +121,11 @@
 											"key": "authorId",
 											"value": "1",
 											"type": "text"
+										},
+										{
+											"key": "pathToImages",
+											"value": "/img/Chrobrys Park/",
+											"type": "text"
 										}
 									]
 								},
@@ -171,6 +176,11 @@
 										{
 											"key": "authorId",
 											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "pathToImages",
+											"value": "/img/Gliwice arena/",
 											"type": "text"
 										}
 									]
@@ -223,6 +233,11 @@
 											"key": "authorId",
 											"value": "1",
 											"type": "text"
+										},
+										{
+											"key": "pathToImages",
+											"value": "/img/Disk Golf/",
+											"type": "text"
 										}
 									]
 								},
@@ -273,6 +288,11 @@
 										{
 											"key": "authorId",
 											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "pathToImages",
+											"value": "/img/Burned Car/",
 											"type": "text"
 										}
 									]
@@ -325,6 +345,11 @@
 											"key": "authorId",
 											"value": "1",
 											"type": "text"
+										},
+										{
+											"key": "pathToImages",
+											"value": "/img/Hill/",
+											"type": "text"
 										}
 									]
 								},
@@ -375,6 +400,11 @@
 										{
 											"key": "authorId",
 											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "pathToImages",
+											"value": "/img/Lion/",
 											"type": "text"
 										}
 									]
@@ -427,6 +457,11 @@
 											"key": "authorId",
 											"value": "1",
 											"type": "text"
+										},
+										{
+											"key": "pathToImages",
+											"value": "/img/MS/",
+											"type": "text"
 										}
 									]
 								},
@@ -477,6 +512,11 @@
 										{
 											"key": "authorId",
 											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "pathToImages",
+											"value": "/img/Tank/",
 											"type": "text"
 										}
 									]
@@ -529,6 +569,67 @@
 											"key": "authorId",
 											"value": "1",
 											"type": "text"
+										},
+										{
+											"key": "pathToImages",
+											"value": "/img/Spider/",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/place/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"place",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Parking",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Parkingi POLSL",
+											"type": "text"
+										},
+										{
+											"key": "welcomeText",
+											"value": "Nigdy nie masz pewności czy znajdziesz miejsce.",
+											"type": "text"
+										},
+										{
+											"key": "information",
+											"value": "Parkingi dla studentów w roku akademickim to istny mordor, jeśli jesteś dobry/a w tertrisa to może znajdziesz miejsce ale i tak nie ma gwarancji. Jedyny plus, że można tu fajnie polatać bokiem, w zimie nawet przednionapędówką, polecam super zabawa, jednak apeluję o ostrożność.",
+											"type": "text"
+										},
+										{
+											"key": "points",
+											"value": "300",
+											"type": "text"
+										},
+										{
+											"key": "authorId",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "pathToImages",
+											"value": "/img/Parking/",
+											"type": "text"
 										}
 									]
 								},
@@ -577,7 +678,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/place/?name=Park Chrobrego",
+							"raw": "http://localhost:8000/api/place/name/Park Chrobrego",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -586,24 +687,31 @@
 							"path": [
 								"api",
 								"place",
-								""
-							],
-							"query": [
-								{
-									"key": "name",
-									"value": "Park Chrobrego"
-								}
+								"name",
+								"Park Chrobrego"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "GetNames",
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": null
+						"url": {
+							"raw": "http://localhost:8000/api/place/allnames",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"place",
+								"allnames"
+							]
+						}
 					},
 					"response": []
 				}
@@ -670,6 +778,69 @@
 								"comment",
 								"place",
 								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Places",
+			"item": [
+				{
+					"name": "GetByUserID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/userPlace/user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"userPlace",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostUserPlace",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "placeId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "userId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/userPlace/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"userPlace",
+								""
 							]
 						}
 					},
