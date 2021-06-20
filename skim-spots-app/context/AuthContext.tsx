@@ -15,7 +15,7 @@ export const AuthProvider: React.FC = ({ children }) => {
       value={{
         user,
         login: () => {
-          const fakeUser: User = { username: "test" };
+          const fakeUser: User = { id: 0,  name: "test" };
           setUser(fakeUser);
           AsyncStorage.setItem("user", JSON.stringify(fakeUser));
         },
