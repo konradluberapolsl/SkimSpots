@@ -104,3 +104,4 @@ dist
 .tern-port
 
 .idea
+SkimSpotsApi/package-lock.json
