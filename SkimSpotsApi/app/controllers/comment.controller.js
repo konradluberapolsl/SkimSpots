@@ -85,7 +85,7 @@ exports.getUserComments = (req, res) => {
 exports.getPlaceComments = (req, res) => {
     var placeID = req.params.id;
 
-    Comment.findAll( {where: { placeId: placeID }})
+    Comment.findAll( {where: { placeId: placeID }, include: [{model: User, as: "user"}],  order: [ [ 'createdAt', 'DESC' ]]})
         .then(data => {
             res.send(data);
         })

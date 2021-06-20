@@ -1,6 +1,7 @@
 const db = require("../models");
 const Place = db.places;
 const Op = db.Sequelize.Op;
+const User = db.user;
 
 exports.create = (req, res) => {
 
@@ -67,9 +68,9 @@ exports.getPlaceByID = (req, res) => {
 
 exports.getPlaceAllNames = (req, res) => {
 
-    Place.findAll({ attributes: ['name'] })
+    Place.findAll({ attributes: ['name'], raw: true })
         .then(data => {
-            res.send(data);
+            res.send(data.map(place => place.name)); // Return only values
         })
         .catch(err => {
             res.status(500).send({
@@ -81,7 +82,7 @@ exports.getPlaceAllNames = (req, res) => {
 exports.getPlaceByName = (req, res) => {
     var name = req.params.name;
 
-    Place.findOne({ where: { name: name } })
+    Place.findOne({ where: { name: name }, include: [{model: User, as: "author"}], })
         .then(data => {
             res.send(data);
         })

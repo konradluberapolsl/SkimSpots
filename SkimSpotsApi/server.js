@@ -26,6 +26,8 @@ const db = require("./app/models");
 // sync all models with db -> auto generate tables
 db.sequelize.sync();
 //db.sequelize.sync({force: true});
+
+
 // user routes
 require("./app/routes/user.routes.js")(app);
 

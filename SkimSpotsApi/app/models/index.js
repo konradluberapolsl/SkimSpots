@@ -20,8 +20,8 @@ db.userPoints = require("./userPoints.model")(sequelize, Sequelize);
 
 // TODO: Delete answers cascade
 // add below to hasMany() -> (onDelete: 'cascade') ??
-db.user.hasMany(db.comments, { as: "comments" });
-//db.comments.belongsTo(db.user, { foreignKey: "userId", as: "user" });
+//db.user.hasMany(db.comments, { as: "comments" });
+db.comments.belongsTo(db.user, { foreignKey: "userId", as: "user" });
 
 db.places.hasMany(db.comments, { as: "comments",  onDelete: 'cascade'  });
 //db.comments.belongsTo(db.places, { foreignKey: "placeId", as: "place" });
@@ -32,10 +32,10 @@ db.places.belongsTo(db.user, { foreignKey: "authorId", as: "author" });
 db.user.hasOne(db.userPoints, { as: "user" });
 //db.userPoints.belongsTo(db.user, { foreignKey: "userId", as: "user" });
 //
-db.user.hasMany(db.userPlaces, { as: "userplaces", onDelete: 'cascade' });
-// db.userPlaces.belongsTo(db.user, { foreignKey: "userId", as: "user" });
+//db.user.hasMany(db.userPlaces, { as: "userplaces", onDelete: 'cascade' });
+db.userPlaces.belongsTo(db.user, { foreignKey: "userId", as: "user" });
 //
-db.places.hasMany(db.userPlaces, { as: "userplaces",  onDelete: 'cascade'  });
-// db.userPlaces.belongsTo(db.places, { foreignKey: "placeId", as: "place" });
+//db.places.hasMany(db.userPlaces, { as: "userplaces",  onDelete: 'cascade'  });
+db.userPlaces.belongsTo(db.places, { foreignKey: "placeId", as: "place" });
 
 module.exports = db;

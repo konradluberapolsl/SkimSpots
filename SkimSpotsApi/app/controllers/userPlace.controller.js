@@ -1,6 +1,7 @@
 const db = require("../models");
 const UserPlace = db.userPlaces;
 const Op = db.Sequelize.Op;
+const Place = db.places;
 
 exports.create = (req, res) => {
 
@@ -13,7 +14,7 @@ exports.create = (req, res) => {
 
     const userPlace = {
         placeId: req.body.placeId,
-        authorId: req.body.authorId
+        userId: req.body.userId
     }
 
     UserPlace.create(userPlace)
@@ -78,7 +79,7 @@ exports.getByPlaceID = (req, res) => {
 exports.getByUserID = (req, res) => {
     var userID = req.params.id;
 
-    UserPlace.findOne({ where: { userId: userID } })
+    UserPlace.findAll({ where: { userId: userID }, include: [{model: Place, as: "place"}] })
         .then(data => {
             res.send(data);
         })
