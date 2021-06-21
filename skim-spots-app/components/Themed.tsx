@@ -4,8 +4,8 @@
  */
 
 import * as React from "react";
-import { Text as DefaultText, View as DefaultView } from "react-native";
-
+import { Text as DefaultText, View as DefaultView,  } from "react-native";
+import {Button as DefaultButton} from "react-native-paper";
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 
@@ -31,6 +31,8 @@ type ThemeProps = {
 export type TextProps = ThemeProps & DefaultText["props"];
 export type ViewProps = ThemeProps & DefaultView["props"];
 
+
+
 export const Text = (props: TextProps) => {
   const { style, lightColor, darkColor, ...otherProps } = props;
   const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
@@ -47,3 +49,13 @@ export const View = (props: ViewProps) => {
 
   return <DefaultView style={[{ backgroundColor }, style]} {...otherProps} />;
 };
+
+export const Button = (props: any) => {
+  const { style, lightColor, darkColor, onPress, ...otherProps} = props;
+  const color = useThemeColor(
+      { light: lightColor, dark: darkColor },
+      "text"
+  );
+// @ts-ignore
+  return <DefaultButton color={color} mode="outlined" style={[{borderRadius:15, borderColor: color},style]} onPress={onPress}  {...otherProps}/>;
+}
