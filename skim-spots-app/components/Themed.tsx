@@ -2,9 +2,8 @@
  * Learn more about Light and Dark modes:
  * https://docs.expo.io/guides/color-schemes/
  */
-
 import * as React from "react";
-import { Text as DefaultText, View as DefaultView,  } from "react-native";
+import { Text as DefaultText, View as DefaultView, ScrollView as  DefaultScrollView } from "react-native";
 import {Button as DefaultButton} from "react-native-paper";
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
@@ -30,14 +29,14 @@ type ThemeProps = {
 
 export type TextProps = ThemeProps & DefaultText["props"];
 export type ViewProps = ThemeProps & DefaultView["props"];
-
+export type ScrollViewProps = ThemeProps & DefaultScrollView["props"];
 
 
 export const Text = (props: TextProps) => {
   const { style, lightColor, darkColor, ...otherProps } = props;
   const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
 
-  return <DefaultText style={[{ color }, style]} {...otherProps} />;
+  return <DefaultText style={[{fontFamily: "OpenSans-Light"},{ color }, style]} {...otherProps} />;
 };
 
 export const View = (props: ViewProps) => {
@@ -50,6 +49,16 @@ export const View = (props: ViewProps) => {
   return <DefaultView style={[{ backgroundColor }, style]} {...otherProps} />;
 };
 
+export const ScrollView = (props: ScrollViewProps) => {
+  const { style, lightColor, darkColor, ...otherProps } = props;
+  const backgroundColor = useThemeColor(
+      { light: lightColor, dark: darkColor },
+      "background"
+  );
+
+  return <DefaultScrollView style={[{ backgroundColor }, style]} {...otherProps} />;
+};
+
 export const Button = (props: any) => {
   const { style, lightColor, darkColor, onPress, ...otherProps} = props;
   const color = useThemeColor(
@@ -57,5 +66,5 @@ export const Button = (props: any) => {
       "text"
   );
 // @ts-ignore
-  return <DefaultButton color={color} mode="outlined" style={[{borderRadius:15, borderColor: color},style]} onPress={onPress}  {...otherProps}/>;
+  return <DefaultButton color={color} mode="outlined" style={[{borderRadius:15, borderColor: color, fontFamily: "OpenSans-Bold"},style]} onPress={onPress}  {...otherProps}/>;
 }
