@@ -2,7 +2,7 @@ const db = require("../models");
 const UserPlace = db.userPlaces;
 const Op = db.Sequelize.Op;
 const Place = db.places;
-
+const User = db.user;
 exports.create = (req, res) => {
 
     // if ((!req.body.title) || (!req.body.information)) {
@@ -79,7 +79,7 @@ exports.getByPlaceID = (req, res) => {
 exports.getByUserID = (req, res) => {
     var userID = req.params.id;
 
-    UserPlace.findAll({ where: { userId: userID }, include: [{model: Place, as: "place"}] })
+    UserPlace.findAll({ where: { userId: userID }, include: {model: Place, as: "place", include : { model: User, as: "author" } } })
         .then(data => {
             res.send(data);
         })
