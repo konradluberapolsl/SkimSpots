@@ -6,6 +6,9 @@ module.exports = (sequelize, Sequelize) => {
         welcomeText: {
             type: Sequelize.STRING
         },
+        estimatedLocalization:{
+          type: Sequelize.STRING
+        },
         information: {
             type: Sequelize.TEXT
         },
