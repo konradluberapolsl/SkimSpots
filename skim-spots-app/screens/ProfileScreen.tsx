@@ -1,12 +1,20 @@
 import * as React from "react";
-import { Button, StyleSheet } from "react-native";
-import { Text, View } from "../components/Themed";
+import {  StyleSheet } from "react-native";
+import { Text, View, Button } from "../components/Themed";
 import { AuthContext } from "../context/AuthContext";
 
 const ProfileScreen = () => {
+
+  const { logout} = React.useContext(AuthContext);
+
+  const onLogoutPressed = () => {
+      logout();
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Profile</Text>
+      <Button style={{marginTop: 20}} onPress={onLogoutPressed}>Log out</Button>
     </View>
   );
 };
@@ -21,7 +29,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    fontWeight: "bold",
   },
   separator: {
     marginVertical: 30,

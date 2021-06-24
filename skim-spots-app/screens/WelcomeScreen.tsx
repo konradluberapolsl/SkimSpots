@@ -4,11 +4,11 @@ import { Text, View } from "../components/Themed";
 import { AuthContext } from "../context/AuthContext";
 
 const WelcomeScreen = () => {
-  const { login } = React.useContext(AuthContext);
+  const { register } = React.useContext(AuthContext);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome</Text>
-      <Button title={"Go!"} onPress={() => login()} />
+      <Button title={"Go!"} onPress={() => register()} />
     </View>
   );
 };

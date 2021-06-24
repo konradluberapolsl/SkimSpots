@@ -1,6 +1,7 @@
 import * as React from "react";
 import {StyleSheet, Dimensions, TouchableOpacity} from "react-native";
 import { Text, View, Button } from "../components/Themed";
+import {Appbar} from "react-native-paper"; // <-- TEMP!!!!! TODO: Find better solution.
 import {View as DefaultView} from "react-native"
 import Place from "../types/Place";
 import {getPlaceByName} from "../api/getPlaceByName";
@@ -13,9 +14,12 @@ import {BarcodeMask} from "@nartc/react-native-barcode-mask";
 import useColorScheme from "../hooks/useColorScheme";
 import Colors from "../constants/Colors";
 import {Image} from "react-native-elements";
+import {PlaceContext} from "../context/PlaceContext";
+import {AuthContext} from "../context/AuthContext";
+import {postUserPlace} from "../api/postUserPlace";
 
 
-const ScanScreen = () => {
+const ScanScreen = ({ navigation }: any) => {
 
   const colorScheme = useColorScheme();
 
@@ -25,6 +29,9 @@ const ScanScreen = () => {
   const [successScan, setSuccessScan] = useState(false);
   const [place, setPlace] = useState<Place>(null);
 
+  const { userPlaces, save } = React.useContext(PlaceContext);
+  const { user } = React.useContext(AuthContext);
+
   useEffect(() => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -32,13 +39,11 @@ const ScanScreen = () => {
     })();
 
     getPlacesNames().then((data) => setPlacesName(data))
-
-    console.log(colorScheme)
-
   }, []);
 
   useEffect(() => {
     if(place != null){
+      setScanned(true);
       setSuccessScan(true);
     }
   },[place])
@@ -46,18 +51,42 @@ const ScanScreen = () => {
   const handleBarCodeScanned = (scanningResult: BarCodeScannerResult) => {
     if (!scanned) {
       const {type, data} = scanningResult;
-      setScanned(true);
       const text = data.split(/\r?\n/)
+
       if(text.length > 1){
         if (placesNames.includes(text[1])){
-          getPlaceByName(text[1]).then( res => setPlace(res));
+          for (let p of userPlaces ){
+            if (p!!.place!!.name == text[1]){
+              setPlace(p!!.place);
+              break;
+            }
+            else if (userPlaces.indexOf(p) == userPlaces.length-1) {
+              getPlaceByName(text[1]).then( res => {
+                setPlace(res);
+                postUserPlace(res!!.id, user!!.id).then( r => {
+                  save(user!!);
+                });
+              });
+            }
+          }
         }
-        else
+        else{
+          setScanned(true);
           alert("Nie rozpoznano kodu :(");
+        }
+
       }
-      else
+      else{
+        setScanned(true);
         alert("Nie rozpoznano kodu :(");
+      }
+
+      //setScanned(true);
     }
+  };
+
+  const onGoButtonClicked = () => {
+    navigation.navigate("PlaceDetailsScreen", {place: place!!})
   };
 
   if (hasPermission === null) {
@@ -79,7 +108,7 @@ const ScanScreen = () => {
             style={[StyleSheet.absoluteFillObject,]}
         />
 
-        {scanned &&
+        {scanned && !successScan &&
         <Button
             style={[{backgroundColor: Colors[colorScheme].background} , styles.scanAgainButton]}
             onPress={() =>{
@@ -88,9 +117,18 @@ const ScanScreen = () => {
               }}>
           Scan Again
         </Button>}
+
         {successScan &&
         <View
             style={[{backgroundColor: Colors[colorScheme].background+"9F"},styles.resultDialog]}>
+          <Appbar.BackAction
+              color={Colors[colorScheme].white}
+              style={styles.backButton}
+              onPress={() => {
+                setSuccessScan(false);
+                setScanned(false);
+              }}
+          />
           <Image
               source={ colorScheme=="dark" ? require('../assets/images/logo-light.png'): require('../assets/images/logo-dark.png')}
               style={{ width: 40 , height: 60, marginBottom: 20 }}
@@ -98,7 +136,7 @@ const ScanScreen = () => {
           <Text style={[{color: dialogTextColor}, styles.resultDialogText]}>Za ten spot otrzymujesz:</Text>
           <Text style={[{color: dialogTextColor}, styles.resultDialogText]}>{place!!.points} ptk</Text>
           <Text style={[{color: dialogTextColor, marginTop: 100},styles.resultDialogText]} >{place!!.welcomeText}</Text>
-          <Button style={styles.goButton}>GO!</Button>
+          <Button style={styles.goButton} onPress={onGoButtonClicked}>GO!</Button>
         </View> }
 
       </View>
@@ -140,6 +178,11 @@ const styles = StyleSheet.create({
   goButton:{
     width: '80%',
     marginTop: '20%'
+  },
+  backButton:{
+    position: "absolute",
+    left: 10,
+    top: 10
   }
 
 });
