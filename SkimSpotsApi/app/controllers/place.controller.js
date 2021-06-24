@@ -16,6 +16,7 @@ exports.create = (req, res) => {
         name: req.body.name,
         welcomeText: req.body.welcomeText,
         information: req.body.information,
+        estimatedLocalization: req.body.estimatedLocalization,
         pathToImages: req.body.pathToImages,
         authorId: req.body.authorId,
         points: req.body.points,
