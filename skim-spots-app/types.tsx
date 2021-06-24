@@ -20,6 +20,8 @@ export type HomeParamList = {
 
 export type ScanParamList = {
   ScanScreen: undefined;
+  PlaceDetailsScreen: undefined;
+  AllPlaceCommentsScreen: undefined;
 };
 
 export type SettingsParamList = {

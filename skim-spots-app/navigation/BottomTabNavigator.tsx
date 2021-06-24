@@ -7,6 +7,8 @@ import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import ProfileScreen from "../screens/ProfileScreen";
 import HomeScreen from "../screens/HomeScreen";
+import PlaceDetailsScreen from "../screens/PlaceDetailsScreen"
+
 import {
   BottomTabParamList,
   ProfileParamList,
@@ -18,6 +20,8 @@ import SettingsScreen from "../screens/SettingsScreen";
 import ScanScreen from "../screens/ScanScreen";
 import { Text, TouchableOpacity } from "react-native";
 import { AuthContext } from "../context/AuthContext";
+import Header from "../components/Header";
+import AllPlaceCommentsScreen from "../screens/AllPlaceCommentsScreen";
 
 const BottomTab = createMaterialBottomTabNavigator<BottomTabParamList>();
 
@@ -87,29 +91,14 @@ const ProfileNavigator = () => {
   const { logout } = React.useContext(AuthContext);
     const colorScheme = useColorScheme();
   return (
-    <ProfileStack.Navigator>
+    <ProfileStack.Navigator
+        screenOptions={{
+            header: (props) => <Header navigation={props.navigation} previous={props.previous} />
+        }}
+    >
       <ProfileStack.Screen
         name="ProfileScreen"
         component={ProfileScreen}
-        options={{
-            headerShown: false,
-            headerTitle: "Profile Title",
-            headerStyle: {
-                backgroundColor: Colors[colorScheme].foreground,
-            },
-          headerRight: () => {
-            return (
-              <TouchableOpacity
-                style={{marginEnd:20}}
-                onPress={() => {
-                  logout();
-                }}
-              >
-                <Text style={{color: Colors[colorScheme].text}}>LOGOUT</Text>
-              </TouchableOpacity>
-            );
-          },
-        }}
       />
     </ProfileStack.Navigator>
   );
@@ -120,17 +109,14 @@ const HomeStack = createStackNavigator<HomeParamList>();
 const HomeNavigator = () => {
     const colorScheme = useColorScheme();
   return (
-    <HomeStack.Navigator>
+    <HomeStack.Navigator
+        screenOptions={{
+            header: (props) => <Header navigation={props.navigation} previous={props.previous} />
+        }}
+    >
       <HomeStack.Screen
         name="HomeScreen"
         component={HomeScreen}
-        options={{
-            headerShown: false,
-            headerTitle: "Home Title",
-            headerStyle: {
-                backgroundColor: Colors[colorScheme].foreground,
-            },
-        }}
       />
     </HomeStack.Navigator>
   );
@@ -142,18 +128,22 @@ const ScanNavigator = () => {
     const colorScheme = useColorScheme();
 
   return (
-    <ScanStack.Navigator>
+    <ScanStack.Navigator
+        screenOptions={{
+            header: (props) => <Header navigation={props.navigation} previous={props.previous} />
+        }}
+    >
       <ScanStack.Screen
         name="ScanScreen"
         component={ScanScreen}
-        options={{
-            headerShown: false,
-            headerTitle: "Scan Title",
-            headerStyle: {
-                backgroundColor: Colors[colorScheme].foreground,
-            },
-        }}
       />
+        <ScanStack.Screen
+            name="PlaceDetailsScreen"
+            component={PlaceDetailsScreen} />
+
+        <ScanStack.Screen
+            name={"AllPlaceCommentsScreen"}
+            component={AllPlaceCommentsScreen} />
     </ScanStack.Navigator>
   );
 };
@@ -163,17 +153,14 @@ const SettingsStack = createStackNavigator<SettingsParamList>();
 const SettingsNavigator = () => {
     const colorScheme = useColorScheme();
   return (
-    <SettingsStack.Navigator>
+    <SettingsStack.Navigator
+        screenOptions={{
+            header: (props) => <Header navigation={props.navigation} previous={props.previous} />
+        }}
+    >
       <SettingsStack.Screen
         name="SettingsScreen"
         component={SettingsScreen}
-        options={{
-            headerShown: false,
-            headerTitle: "Settings Title",
-            headerStyle: {
-                backgroundColor: Colors[colorScheme].foreground,
-            },
-        }}
       />
     </SettingsStack.Navigator>
   );
