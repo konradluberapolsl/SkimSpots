@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const premiumPlace = sequelize.define("premiumPlace", {
+    const premiumPlace = sequelize.define("premium_place", {
         date: {
             type: Sequelize.DATE,
         },
