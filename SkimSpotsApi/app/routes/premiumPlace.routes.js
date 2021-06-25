@@ -8,5 +8,8 @@ module.exports = (app) => {
     //Retrieve all places
     router.get("/", place.getAll);
 
+    //Retrieve current premium places
+    router.get("/today", place.getCurrentPremiumPlaces);
+
     app.use("/api/premiumPlace", router);
 };
