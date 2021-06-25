@@ -38,6 +38,6 @@ db.userPlaces.belongsTo(db.user, { foreignKey: "userId", as: "user" });
 //db.places.hasMany(db.userPlaces, { as: "userplaces",  onDelete: 'cascade'  });
 db.userPlaces.belongsTo(db.places, { foreignKey: "placeId", as: "place" });
 
-db.premiumPlaces.hasOne(db.places, { foreignKey: "placeId", as: "place" });
+db.premiumPlaces.belongsTo(db.places, { foreignKey: "placeId", as: "place" });
 
 module.exports = db;
