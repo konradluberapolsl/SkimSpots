@@ -6,7 +6,7 @@ const app = express();
 
 // TODO: read about cors
 var corsOptions = {
-    origin: "http://localhost:3000"
+    origin: "http://localhost:3000",
 };
 
 app.use(cors(corsOptions));
@@ -17,8 +17,7 @@ app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
-app.use('/img', express.static('../Places/'));
+app.use("/img", express.static("../Places/"));
 
 // call sysc()
 const db = require("./app/models");
@@ -26,7 +25,6 @@ const db = require("./app/models");
 // sync all models with db -> auto generate tables
 db.sequelize.sync();
 //db.sequelize.sync({force: true});
-
 
 // user routes
 require("./app/routes/user.routes.js")(app);
@@ -42,6 +40,9 @@ require("./app/routes/userPoints.routes.js")(app);
 
 // user places routes
 require("./app/routes/userPlace.routes.js")(app);
+
+// user premiumPlaces routes
+require("./app/routes/premiumPlace.routes.js")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8000;

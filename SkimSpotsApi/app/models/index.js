@@ -16,14 +16,14 @@ db.places = require("./place.model.js")(sequelize, Sequelize);
 db.comments = require("./comment.model.js")(sequelize, Sequelize);
 db.userPlaces = require("./userPlace.model")(sequelize, Sequelize);
 db.userPoints = require("./userPoints.model")(sequelize, Sequelize);
-
+db.premiumPlaces = require("./premiumPlace.model")(sequelize, Sequelize);
 
 // TODO: Delete answers cascade
 // add below to hasMany() -> (onDelete: 'cascade') ??
 //db.user.hasMany(db.comments, { as: "comments" });
 db.comments.belongsTo(db.user, { foreignKey: "userId", as: "user" });
 
-db.places.hasMany(db.comments, { as: "comments",  onDelete: 'cascade'  });
+db.places.hasMany(db.comments, { as: "comments", onDelete: "cascade" });
 //db.comments.belongsTo(db.places, { foreignKey: "placeId", as: "place" });
 
 //db.user.hasMany(db.places, { as: "places" });
@@ -37,5 +37,7 @@ db.userPlaces.belongsTo(db.user, { foreignKey: "userId", as: "user" });
 //
 //db.places.hasMany(db.userPlaces, { as: "userplaces",  onDelete: 'cascade'  });
 db.userPlaces.belongsTo(db.places, { foreignKey: "placeId", as: "place" });
+
+db.premiumPlaces.belongsTo(db.places, { foreignKey: "placeId", as: "place" });
 
 module.exports = db;
