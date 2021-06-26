@@ -52,22 +52,26 @@ const ScanScreen = ({ navigation }: any) => {
     if (!scanned) {
       const {type, data} = scanningResult;
       const text = data.split(/\r?\n/)
+      let placeFound = false;
 
       if(text.length > 1){
         if (placesNames.includes(text[1])){
-          for (let p of userPlaces ){
-            if (p!!.place!!.name == text[1]){
-              setPlace(p!!.place);
-              break;
+          if(userPlaces.length != 0) {
+            for (let p of userPlaces ){
+              if (p!!.place!!.name == text[1]){
+                setPlace(p!!.place);
+                placeFound = true;
+                break;
+              }
             }
-            else if (userPlaces.indexOf(p) == userPlaces.length-1) {
-              getPlaceByName(text[1]).then( res => {
-                setPlace(res);
-                postUserPlace(res!!.id, user!!.id).then( r => {
-                  save(user!!);
-                });
+          }
+          if (!placeFound){
+            getPlaceByName(text[1]).then( res => {
+              setPlace(res);
+              postUserPlace(res!!.id, user!!.id).then( r => {
+                save(user!!);
               });
-            }
+            });
           }
         }
         else{
