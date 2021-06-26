@@ -2,7 +2,6 @@ import * as React from "react";
 import { StyleSheet, Switch } from "react-native";
 import { Text, View } from "../components/Themed";
 import { ThemeContext } from "../context/ThemeContext";
-import useColorScheme from "../hooks/useColorScheme";
 
 const SettingsScreen = () => {
   const { toggleTheme, darkTheme } = React.useContext(ThemeContext);

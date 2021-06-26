@@ -1,5 +1,5 @@
 
-const yourLocalIP : string = "192.168.0.80"
+const yourLocalIP : string = "192.168.1.88"
 
 const url: string = `http://${yourLocalIP}:8000/api`
 

@@ -1,13 +1,12 @@
 import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import {createMaterialBottomTabNavigator} from "@react-navigation/material-bottom-tabs"
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
 import Colors from "../constants/Colors";
-import useColorScheme from "../hooks/useColorScheme";
 import ProfileScreen from "../screens/ProfileScreen";
 import HomeScreen from "../screens/HomeScreen";
-import PlaceDetailsScreen from "../screens/PlaceDetailsScreen"
+import PlaceDetailsScreen from "../screens/PlaceDetailsScreen";
 
 import {
   BottomTabParamList,
@@ -22,56 +21,42 @@ import { Text, TouchableOpacity } from "react-native";
 import { AuthContext } from "../context/AuthContext";
 import Header from "../components/Header";
 import AllPlaceCommentsScreen from "../screens/AllPlaceCommentsScreen";
+import { ThemeContext } from "../context/ThemeContext";
 
 const BottomTab = createMaterialBottomTabNavigator<BottomTabParamList>();
 
-
 const BottomTabNavigator = () => {
-    const colorScheme = useColorScheme();
+  const { theme } = React.useContext(ThemeContext);
   return (
     <BottomTab.Navigator
       initialRouteName="Profile"
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color }) => {
+          let iconName;
 
-      screenOptions={
-          ({ route }) => ({
-              tabBarIcon: ({ focused, color}) => {
-                  let iconName;
+          if (route.name == "Profile") {
+            iconName = "person";
+          } else if (route.name == "Home") {
+            iconName = "home";
+          } else if (route.name == "Scan") {
+            iconName = "scan-outline";
+          } else if (route.name == "Settings") iconName = "settings";
 
-                  if (route.name == 'Profile') {
-                      iconName = 'person';
-                  } else if (route.name == 'Home') {
-                      iconName = 'home';
-                  } else if (route.name == 'Scan') {
-                      iconName = 'scan-outline';
-                  } else if(route.name == 'Settings')
-                      iconName = 'settings'
-
-                  // You can return any component that you like here!
-                  // @ts-ignore
-                  return <Ionicons name={iconName} size={23} color={color}  />;
-              },
-
-          })}
-      barStyle={{ backgroundColor: Colors[colorScheme].foreground }}
+          // You can return any component that you like here!
+          // @ts-ignore
+          return <Ionicons name={iconName} size={23} color={color} />;
+        },
+      })}
+      barStyle={{ backgroundColor: Colors[theme].foreground }}
     >
       <BottomTab.Screen
         name="Profile"
         component={ProfileNavigator}
-        options={{
+        options={{}}
+      />
+      <BottomTab.Screen name="Home" component={HomeNavigator} />
 
-        }}
-      />
-      <BottomTab.Screen
-        name="Home"
-        component={HomeNavigator}
-      />
-
-      <BottomTab.Screen
-        name="Scan"
-        component={ScanNavigator}
-        options={{
-        }}
-      />
+      <BottomTab.Screen name="Scan" component={ScanNavigator} options={{}} />
 
       <BottomTab.Screen
         name="Settings"
@@ -84,22 +69,20 @@ const BottomTabNavigator = () => {
 
 export default BottomTabNavigator;
 
-
 const ProfileStack = createStackNavigator<ProfileParamList>();
 
 const ProfileNavigator = () => {
   const { logout } = React.useContext(AuthContext);
-    const colorScheme = useColorScheme();
+
   return (
     <ProfileStack.Navigator
-        screenOptions={{
-            header: (props) => <Header navigation={props.navigation} previous={props.previous} />
-        }}
+      screenOptions={{
+        header: (props) => (
+          <Header navigation={props.navigation} previous={props.previous} />
+        ),
+      }}
     >
-      <ProfileStack.Screen
-        name="ProfileScreen"
-        component={ProfileScreen}
-      />
+      <ProfileStack.Screen name="ProfileScreen" component={ProfileScreen} />
     </ProfileStack.Navigator>
   );
 };
@@ -107,17 +90,15 @@ const ProfileNavigator = () => {
 const HomeStack = createStackNavigator<HomeParamList>();
 
 const HomeNavigator = () => {
-    const colorScheme = useColorScheme();
   return (
     <HomeStack.Navigator
-        screenOptions={{
-            header: (props) => <Header navigation={props.navigation} previous={props.previous} />
-        }}
+      screenOptions={{
+        header: (props) => (
+          <Header navigation={props.navigation} previous={props.previous} />
+        ),
+      }}
     >
-      <HomeStack.Screen
-        name="HomeScreen"
-        component={HomeScreen}
-      />
+      <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
     </HomeStack.Navigator>
   );
 };
@@ -125,25 +106,24 @@ const HomeNavigator = () => {
 const ScanStack = createStackNavigator<ScanParamList>();
 
 const ScanNavigator = () => {
-    const colorScheme = useColorScheme();
-
   return (
     <ScanStack.Navigator
-        screenOptions={{
-            header: (props) => <Header navigation={props.navigation} previous={props.previous} />
-        }}
+      screenOptions={{
+        header: (props) => (
+          <Header navigation={props.navigation} previous={props.previous} />
+        ),
+      }}
     >
+      <ScanStack.Screen name="ScanScreen" component={ScanScreen} />
       <ScanStack.Screen
-        name="ScanScreen"
-        component={ScanScreen}
+        name="PlaceDetailsScreen"
+        component={PlaceDetailsScreen}
       />
-        <ScanStack.Screen
-            name="PlaceDetailsScreen"
-            component={PlaceDetailsScreen} />
 
-        <ScanStack.Screen
-            name={"AllPlaceCommentsScreen"}
-            component={AllPlaceCommentsScreen} />
+      <ScanStack.Screen
+        name={"AllPlaceCommentsScreen"}
+        component={AllPlaceCommentsScreen}
+      />
     </ScanStack.Navigator>
   );
 };
@@ -151,17 +131,15 @@ const ScanNavigator = () => {
 const SettingsStack = createStackNavigator<SettingsParamList>();
 
 const SettingsNavigator = () => {
-    const colorScheme = useColorScheme();
   return (
     <SettingsStack.Navigator
-        screenOptions={{
-            header: (props) => <Header navigation={props.navigation} previous={props.previous} />
-        }}
+      screenOptions={{
+        header: (props) => (
+          <Header navigation={props.navigation} previous={props.previous} />
+        ),
+      }}
     >
-      <SettingsStack.Screen
-        name="SettingsScreen"
-        component={SettingsScreen}
-      />
+      <SettingsStack.Screen name="SettingsScreen" component={SettingsScreen} />
     </SettingsStack.Navigator>
   );
 };
