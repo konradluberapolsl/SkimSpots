@@ -18,6 +18,7 @@ exports.create = (req, res) => {
         information: req.body.information,
         estimatedLocalization: req.body.estimatedLocalization,
         pathToImages: req.body.pathToImages,
+        numberOfImages: req.body.numberOfImages,
         authorId: req.body.authorId,
         points: req.body.points,
     }

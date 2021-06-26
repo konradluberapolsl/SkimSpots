@@ -17,6 +17,9 @@ module.exports = (sequelize, Sequelize) => {
         },
         pathToImages:{
             type: Sequelize.STRING
+        },
+        numberOfImages:{
+            type: Sequelize.INTEGER
         }
     });
 
