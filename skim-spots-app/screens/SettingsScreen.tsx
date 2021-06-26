@@ -1,24 +1,37 @@
 import * as React from "react";
 import { StyleSheet, Switch } from "react-native";
 import { Text, View } from "../components/Themed";
-import { ThemeContext } from "../context/ThemeContext";
+import { DARK, ThemeContext } from "../context/ThemeContext";
+import useColorScheme from "../hooks/useColorScheme";
 
 const SettingsScreen = () => {
   const { toggleTheme, darkTheme } = React.useContext(ThemeContext);
+  const [systemTheme, setSystemTheme] = React.useState<boolean>(true);
+
+  const systemColorScheme = useColorScheme();
+  const setSystemColorScheme = (val: boolean) => {
+    setSystemTheme(val);
+
+    if (systemColorScheme === DARK) {
+      toggleTheme(true);
+    } else {
+      toggleTheme(false);
+    }
+  };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Settings</Text>
-      {/* <View style={styles.row}>
-        <Text>System theme</Text>
-        <Switch value={test} onValueChange={() => setTest(!test)} />
-      </View> */}
       <View style={styles.row}>
-        <Text>Dark mode</Text>
+        <Text style={styles.settingLabel}>System theme</Text>
+        <Switch value={systemTheme} onValueChange={setSystemColorScheme} />
+      </View>
+      <View style={styles.row}>
+        <Text style={styles.settingLabel}>Dark mode</Text>
         <Switch
           value={darkTheme}
           onValueChange={toggleTheme}
-          // disabled={test}
+          disabled={systemTheme}
         />
       </View>
     </View>
@@ -30,12 +43,12 @@ export default SettingsScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    padding: 20,
   },
   title: {
-    fontSize: 20,
+    fontSize: 25,
     fontWeight: "bold",
+    marginBottom: 10,
   },
   separator: {
     marginVertical: 30,
@@ -43,6 +56,11 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   row: {
+    marginTop: 5,
     flexDirection: "row",
+  },
+  settingLabel: {
+    fontSize: 16,
+    width: "85%",
   },
 });
