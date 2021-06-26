@@ -1,6 +1,7 @@
 import React from "react";
 import {Button, ScrollView, Text, View} from "../components/Themed";
 import {ActivityIndicator, SafeAreaView, StyleSheet} from "react-native";
+import { SliderBox } from "react-native-image-slider-box";
 import Place from "../types/Place";
 import useColorScheme from "../hooks/useColorScheme";
 import {Image} from "react-native-elements";
@@ -28,18 +29,34 @@ const PlaceDetailsScreen = (props: OwnProps) => {
     const secondaryTextColor = Colors[colorScheme].secondaryText;
     const foregroundColor = Colors[colorScheme].foreground;
 
-    const [comments, setComments] = React.useState<PlaceComment[]>([])
+    const yourLocalIP : string = "192.168.0.80"
+
+    const [comments, setComments] = React.useState<PlaceComment[]>([]);
+    const [photos, setPhotos] = React.useState<string[]>([
+        `http://${yourLocalIP}:8000/img/Lion/1.jpg`,
+        `http://${yourLocalIP}:8000/img/Lion/2.jpg`,
+    ])
     const [commentsReady, setCommentsReady] = React.useState(false);
     const [text, onTextChange] = React.useState("");
     const [postCommentVisibility, setPostCommentVisibility] = React.useState(false)
+    const [width, setWidth] = React.useState<any>()
+
 
     const numberOfCommentsToShow = 3;
     const { user } = React.useContext(AuthContext);
 
+    const setPhotosURLs = () => {
+        let tmp = [];
+        for(let i = 1; i<=place!!.numberOfImages; i++){
+            tmp.push(`http://${yourLocalIP}:8000${place!!.pathToImages}${i}.jpg`);
+        }
+        setPhotos(tmp);
+    }
+
     const onPostCommentButtonClicked = () => {
         postUserComment(place!!.id, user!!, text).then(r => {
             setComments(oldArray => [ r ,...oldArray]);
-            onTextChange("")
+            onTextChange("");
         });
     };
 
@@ -56,9 +73,13 @@ const PlaceDetailsScreen = (props: OwnProps) => {
     }, [props.navigation]);
 
     React.useEffect(()=> {
-
+        setPhotosURLs();
     },[])
 
+
+    const onLayout = (e: any) => {
+        setWidth(e.nativeEvent.layout.width - 60);
+    }
 
     React.useEffect(()=> {
         if(comments.length != 0){
@@ -68,7 +89,7 @@ const PlaceDetailsScreen = (props: OwnProps) => {
 
     return(
         <SafeAreaView style={styles.container}>
-        <ScrollView  contentContainerStyle={styles.scrollContainer}>
+        <ScrollView  contentContainerStyle={styles.scrollContainer} onLayout={onLayout}>
             <View style={styles.topContent}>
                 <Image
                     source={ colorScheme=="dark" ? require('../assets/images/logo-light.png'): require('../assets/images/logo-dark.png')}
@@ -78,10 +99,32 @@ const PlaceDetailsScreen = (props: OwnProps) => {
             </View>
 
             <Text style={{fontSize: 30, color: secondaryTextColor}} >{place!!.name}</Text>
-            <Text style={{fontSize: 25, marginTop: 5}}>{place!!.estimatedLocalization}</Text>
-            <Text style={{fontSize: 100, marginTop: 30}}>PHOTOS</Text>
+            <Text style={{fontSize: 25, marginTop: 5, marginBottom: 30}}>{place!!.estimatedLocalization}</Text>
+
+            <SliderBox images={photos}
+                       resizeMethod="scale"
+                       sliderBoxHeight={300}
+                       paginationBoxVerticalPadding={10}
+                       ImageComponentStyle={[{
+                           borderRadius: 15, width: '100%',
+                           borderColor: Colors[colorScheme].text,
+                           borderWidth: 1
+                       }]}
+                       dotStyle={{
+                           width: 12,
+                           height: 12,
+                           borderRadius: 15,
+
+                       }}
+                       dotColor={Colors[colorScheme].foreground}
+                       imageLoadingColor={Colors[colorScheme].foreground}
+                       inactiveDotColor={'#575757'}
+                       circleLoop
+                       parentWidth={width}
+            />
+
             <Text style={{fontSize: 20, marginTop: 25}}>{place!!.information}</Text>
-            <Text style={{fontSize: 15, marginTop: 10, fontFamily: "OpenSans-LightItalic"}}>Dodane przez: {place!!.author.name}</Text>
+            <Text style={{fontSize: 15, marginTop: 10, fontFamily: "OpenSans-LightItalic"}}>Dodane przez: {place!!.author!!.name}</Text>
             {commentsReady ?(
                     comments!!.slice(0, numberOfCommentsToShow).map((comment, index) => {
                             return (
@@ -126,6 +169,7 @@ const styles = StyleSheet.create({
     },
     commentsContainer:{
         marginTop: 30,
+
     },
     button:{
         marginTop: 20
