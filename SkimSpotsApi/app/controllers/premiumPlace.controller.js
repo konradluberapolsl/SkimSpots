@@ -1,6 +1,7 @@
 const db = require("../models");
 const PremiumPlaces = db.premiumPlaces;
 const Places = db.places;
+const User = db.user;
 
 exports.create = (req, res) => {
     const premiumPlace = {
@@ -33,7 +34,13 @@ exports.getAll = (req, res) => {
 };
 
 exports.getCurrentPremiumPlaces = (req, res) => {
-    PremiumPlaces.findAll()
+    PremiumPlaces.findAll({
+            include: {
+                model: Places,
+                as: "place",
+                include: { model: User, as: "author" },
+            },
+        })
         .then((data) => {
             if (data.length > 0) {
                 const premiumPlacesDate = data[0].date.toISOString().slice(0, 10);
@@ -45,14 +52,30 @@ exports.getCurrentPremiumPlaces = (req, res) => {
                     PremiumPlaces.destroy({
                         truncate: true,
                     }).then(() => {
-                        createNewPremiumPlaces().then((data) => {
-                            res.send(data);
+                        createNewPremiumPlaces().then(() => {
+                            PremiumPlaces.findAll({
+                                include: {
+                                    model: Places,
+                                    as: "place",
+                                    include: { model: User, as: "author" },
+                                },
+                            }).then((data) => {
+                                res.send(data);
+                            });
                         });
                     });
                 }
             } else {
-                createNewPremiumPlaces().then((data) => {
-                    res.send(data);
+                createNewPremiumPlaces().then(() => {
+                    PremiumPlaces.findAll({
+                        include: {
+                            model: Places,
+                            as: "place",
+                            include: { model: User, as: "author" },
+                        },
+                    }).then((data) => {
+                        res.send(data);
+                    });
                 });
             }
         })
