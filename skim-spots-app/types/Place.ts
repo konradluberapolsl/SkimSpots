@@ -8,6 +8,7 @@ type Place = null | {
     information: string;
     estimatedLocalization: string;
     pathToImages: string;
+    numberOfImages: number;
     points: number;
     authorId: number;
     createdAt: string;
