@@ -126,6 +126,16 @@
 											"key": "pathToImages",
 											"value": "/img/Chrobrys Park/",
 											"type": "text"
+										},
+										{
+											"key": "numberOfImages",
+											"value": "4",
+											"type": "text"
+										},
+										{
+											"key": "estimatedLocalization",
+											"value": "Gliwice, Politechnika",
+											"type": "text"
 										}
 									]
 								},
@@ -181,6 +191,16 @@
 										{
 											"key": "pathToImages",
 											"value": "/img/Gliwice arena/",
+											"type": "text"
+										},
+										{
+											"key": "numberOfImages",
+											"value": "3",
+											"type": "text"
+										},
+										{
+											"key": "estimatedLocalization",
+											"value": "Gliwice, Politechnika",
 											"type": "text"
 										}
 									]
@@ -238,6 +258,16 @@
 											"key": "pathToImages",
 											"value": "/img/Disk Golf/",
 											"type": "text"
+										},
+										{
+											"key": "estimatedLocalization",
+											"value": "Gliwice, Politechnika",
+											"type": "text"
+										},
+										{
+											"key": "numberOfImages",
+											"value": "4",
+											"type": "text"
 										}
 									]
 								},
@@ -293,6 +323,16 @@
 										{
 											"key": "pathToImages",
 											"value": "/img/Burned Car/",
+											"type": "text"
+										},
+										{
+											"key": "estimatedLocalization",
+											"value": "Gliwice, Politechnika",
+											"type": "text"
+										},
+										{
+											"key": "numberOfImages",
+											"value": "3",
 											"type": "text"
 										}
 									]
@@ -350,6 +390,16 @@
 											"key": "pathToImages",
 											"value": "/img/Hill/",
 											"type": "text"
+										},
+										{
+											"key": "estimatedLocalization",
+											"value": "Gliwice, Politechnika",
+											"type": "text"
+										},
+										{
+											"key": "numberOfImages",
+											"value": "1",
+											"type": "text"
 										}
 									]
 								},
@@ -405,6 +455,16 @@
 										{
 											"key": "pathToImages",
 											"value": "/img/Lion/",
+											"type": "text"
+										},
+										{
+											"key": "estimatedLocalization",
+											"value": "Gliwice, Centrum",
+											"type": "text"
+										},
+										{
+											"key": "numberOfImages",
+											"value": "2",
 											"type": "text"
 										}
 									]
@@ -462,6 +522,16 @@
 											"key": "pathToImages",
 											"value": "/img/MS/",
 											"type": "text"
+										},
+										{
+											"key": "estimatedLocalization",
+											"value": "Gliwice, Politechnika",
+											"type": "text"
+										},
+										{
+											"key": "numberOfImages",
+											"value": "2",
+											"type": "text"
 										}
 									]
 								},
@@ -517,6 +587,16 @@
 										{
 											"key": "pathToImages",
 											"value": "/img/Tank/",
+											"type": "text"
+										},
+										{
+											"key": "estimatedLocalization",
+											"value": "Gliwice, Centrum",
+											"type": "text"
+										},
+										{
+											"key": "numberOfImages",
+											"value": "5",
 											"type": "text"
 										}
 									]
@@ -574,6 +654,16 @@
 											"key": "pathToImages",
 											"value": "/img/Spider/",
 											"type": "text"
+										},
+										{
+											"key": "estimatedLocalization",
+											"value": "Gliwice, Politechnika",
+											"type": "text"
+										},
+										{
+											"key": "numberOfImages",
+											"value": "2",
+											"type": "text"
 										}
 									]
 								},
@@ -630,6 +720,16 @@
 											"key": "pathToImages",
 											"value": "/img/Parking/",
 											"type": "text"
+										},
+										{
+											"key": "estimatedLocalization",
+											"value": "Gliwice, Politechnika",
+											"type": "text"
+										},
+										{
+											"key": "numberOfImages",
+											"value": "2",
+											"type": "text"
 										}
 									]
 								},
@@ -678,7 +778,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/api/place/name/Park Chrobrego",
+							"raw": "http://localhost:8000/api/place/name/Pająk w parku Chrobrego",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -688,7 +788,7 @@
 								"api",
 								"place",
 								"name",
-								"Park Chrobrego"
+								"Pająk w parku Chrobrego"
 							]
 						}
 					},
@@ -730,7 +830,7 @@
 							"urlencoded": [
 								{
 									"key": "content",
-									"value": "Fajne miejsce",
+									"value": "ELO ELO",
 									"type": "text"
 								},
 								{
@@ -763,11 +863,18 @@
 				},
 				{
 					"name": "GetCommentsForPlace",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
 						"url": {
-							"raw": "http://localhost:8000/api/comment/place/1",
+							"raw": "http://localhost:8000/api/comment/place/8",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -777,7 +884,7 @@
 								"api",
 								"comment",
 								"place",
-								"1"
+								"8"
 							]
 						}
 					},
@@ -813,6 +920,9 @@
 				{
 					"name": "PostUserPlace",
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
