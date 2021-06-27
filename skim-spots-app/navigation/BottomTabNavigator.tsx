@@ -22,6 +22,7 @@ import { Text, TouchableOpacity } from "react-native";
 import { AuthContext } from "../context/AuthContext";
 import Header from "../components/Header";
 import AllPlaceCommentsScreen from "../screens/AllPlaceCommentsScreen";
+import RankingScreen from "../screens/RankingScreen";
 
 const BottomTab = createMaterialBottomTabNavigator<BottomTabParamList>();
 
@@ -100,6 +101,12 @@ const ProfileNavigator = () => {
         name="ProfileScreen"
         component={ProfileScreen}
       />
+        
+        <ProfileStack.Screen
+            name="RankingScreen"
+            component={RankingScreen}
+        />
+
     </ProfileStack.Navigator>
   );
 };

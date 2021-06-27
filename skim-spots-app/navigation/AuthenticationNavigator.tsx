@@ -7,7 +7,11 @@ const AuthenticationStack = createStackNavigator<AuthenticationParamList>();
 
 const AuthenticationNavigator = () => {
   return (
-    <AuthenticationStack.Navigator initialRouteName="WelcomeScreen">
+    <AuthenticationStack.Navigator initialRouteName="WelcomeScreen"
+        screenOptions={{
+            headerShown: false
+        }}
+    >
       <AuthenticationStack.Screen
         name="WelcomeScreen"
         component={WelcomeScreen}
