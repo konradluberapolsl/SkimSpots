@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, ScrollView, Text, View } from "../components/Themed";
 import { ActivityIndicator, SafeAreaView, StyleSheet } from "react-native";
+// @ts-ignore
 import { SliderBox } from "react-native-image-slider-box";
 import Place from "../types/Place";
 import { Image } from "react-native-elements";
@@ -34,10 +35,7 @@ const PlaceDetailsScreen = (props: OwnProps) => {
     REACT_APP_TEST_KEY !== undefined ? REACT_APP_TEST_KEY : "192.168.1.88";
 
   const [comments, setComments] = React.useState<PlaceComment[]>([]);
-  const [photos, setPhotos] = React.useState<string[]>([
-    `http://${yourLocalIP}:8000/img/Lion/1.jpg`,
-    `http://${yourLocalIP}:8000/img/Lion/2.jpg`,
-  ]);
+  const [photos, setPhotos] = React.useState<string[]>([]);
   const [commentsReady, setCommentsReady] = React.useState(false);
   const [text, onTextChange] = React.useState("");
   const [postCommentVisibility, setPostCommentVisibility] =

@@ -1,6 +1,8 @@
 const db = require("../models");
+const sequelize = require("moment");
 const UserPoints = db.userPoints;
 const Op = db.Sequelize.Op;
+const User = db.user;
 
 exports.create = (req, res) => {
 
@@ -36,7 +38,9 @@ exports.getAll = (req, res) => {
     //     }
     // } : null;
 
-    UserPoints.findAll()
+    UserPoints.findAll( {order: [['amount','DESC']] ,include: [{model: User, as: "user"}],
+
+    })
         .then(data => {
             res.send(data);
         })

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, Dimensions, TouchableOpacity } from "react-native";
+import { StyleSheet } from "react-native";
 import { Text, View, Button } from "../components/Themed";
 import { Appbar } from "react-native-paper"; // <-- TEMP!!!!! TODO: Find better solution.
 import Place from "../types/Place";
@@ -13,6 +13,8 @@ import { PlaceContext } from "../context/PlaceContext";
 import { AuthContext } from "../context/AuthContext";
 import { postUserPlace } from "../api/postUserPlace";
 import { ThemeContext } from "../context/ThemeContext";
+import { getUserPointsByUserID } from "../api/getUserPointsByUserID";
+import { updateUserPoints } from "../api/updateUserPoints";
 
 const ScanScreen = ({ navigation }: any) => {
   const { theme } = React.useContext(ThemeContext);
@@ -69,6 +71,10 @@ const ScanScreen = ({ navigation }: any) => {
               setPlace(res);
               postUserPlace(res!!.id, user!!.id).then((r) => {
                 save(user!!);
+                getUserPointsByUserID(user!!.id).then((d) => {
+                  let amount = d!!.amount + res!!.points;
+                  updateUserPoints(user!!.id, amount);
+                });
               });
             });
           }

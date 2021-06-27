@@ -12,6 +12,7 @@ export type BottomTabParamList = {
 
 export type ProfileParamList = {
   ProfileScreen: undefined;
+  RankingScreen: undefined;
 };
 
 export type HomeParamList = {
