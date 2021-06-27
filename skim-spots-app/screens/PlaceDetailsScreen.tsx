@@ -1,6 +1,7 @@
 import React from "react";
 import {Button, ScrollView, Text, View} from "../components/Themed";
 import {ActivityIndicator, SafeAreaView, StyleSheet} from "react-native";
+// @ts-ignore
 import { SliderBox } from "react-native-image-slider-box";
 import Place from "../types/Place";
 import useColorScheme from "../hooks/useColorScheme";
@@ -12,6 +13,7 @@ import CommentItem from "../components/CommentItem";
 import OwnComment from "../components/OwnComment";
 import {AuthContext} from "../context/AuthContext";
 import {postUserComment} from "../api/postUserComment";
+
 
 interface PlaceDetailsScreenProps{
     place: Place,
@@ -29,13 +31,10 @@ const PlaceDetailsScreen = (props: OwnProps) => {
     const secondaryTextColor = Colors[colorScheme].secondaryText;
     const foregroundColor = Colors[colorScheme].foreground;
 
-    const yourLocalIP : string = "192.168.0.80"
+    const yourLocalIP : string = "192.168.0.80";
 
     const [comments, setComments] = React.useState<PlaceComment[]>([]);
-    const [photos, setPhotos] = React.useState<string[]>([
-        `http://${yourLocalIP}:8000/img/Lion/1.jpg`,
-        `http://${yourLocalIP}:8000/img/Lion/2.jpg`,
-    ])
+    const [photos, setPhotos] = React.useState<string[]>([])
     const [commentsReady, setCommentsReady] = React.useState(false);
     const [text, onTextChange] = React.useState("");
     const [postCommentVisibility, setPostCommentVisibility] = React.useState(false)
