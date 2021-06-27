@@ -17,6 +17,8 @@ import {Image} from "react-native-elements";
 import {PlaceContext} from "../context/PlaceContext";
 import {AuthContext} from "../context/AuthContext";
 import {postUserPlace} from "../api/postUserPlace";
+import {getUserPointsByUserID} from "../api/getUserPointsByUserID";
+import {updateUserPoints} from "../api/updateUserPoints";
 
 
 const ScanScreen = ({ navigation }: any) => {
@@ -70,6 +72,10 @@ const ScanScreen = ({ navigation }: any) => {
               setPlace(res);
               postUserPlace(res!!.id, user!!.id).then( r => {
                 save(user!!);
+                getUserPointsByUserID(user!!.id).then(d => {
+                   let amount = d!!.amount  +  res!!.points;
+                   updateUserPoints(user!!.id, amount);
+                })
               });
             });
           }
