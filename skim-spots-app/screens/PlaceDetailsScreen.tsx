@@ -25,11 +25,13 @@ interface OwnProps {
 const PlaceDetailsScreen = (props: OwnProps) => {
   const { place }: PlaceDetailsScreenProps = props.route.params;
   const { theme } = React.useContext(ThemeContext);
+  const { REACT_APP_TEST_KEY } = process.env;
 
   const secondaryTextColor = Colors["light"].secondaryText;
   const foregroundColor = Colors["light"].foreground;
 
-  const yourLocalIP: string = "192.168.1.88";
+  const yourLocalIP: string =
+    REACT_APP_TEST_KEY !== undefined ? REACT_APP_TEST_KEY : "192.168.1.88";
 
   const [comments, setComments] = React.useState<PlaceComment[]>([]);
   const [photos, setPhotos] = React.useState<string[]>([
