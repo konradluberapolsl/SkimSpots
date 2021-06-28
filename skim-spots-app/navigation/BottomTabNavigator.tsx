@@ -23,6 +23,7 @@ import Header from "../components/Header";
 import AllPlaceCommentsScreen from "../screens/AllPlaceCommentsScreen";
 import { ThemeContext } from "../context/ThemeContext";
 import RankingScreen from "../screens/RankingScreen";
+import VisitedPlacesScreen from "../screens/VisitedPlacesScreen";
 
 const BottomTab = createMaterialBottomTabNavigator<BottomTabParamList>();
 
@@ -86,6 +87,10 @@ const ProfileNavigator = () => {
       <ProfileStack.Screen name="ProfileScreen" component={ProfileScreen} />
 
       <ProfileStack.Screen name="RankingScreen" component={RankingScreen} />
+
+      <ProfileStack.Screen name="VisitedPlacesScreen" component={VisitedPlacesScreen} />
+
+      <ProfileStack.Screen name="PlaceDetailsScreen" component={PlaceDetailsScreen} />
     </ProfileStack.Navigator>
   );
 };

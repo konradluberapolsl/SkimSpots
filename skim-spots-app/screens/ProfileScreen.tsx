@@ -103,6 +103,10 @@ const ProfileScreen = ({navigation} : any) => {
           <Button style={{marginTop: '10%'}}
                   onPress={() => navigation.navigate("RankingScreen", {ranking: ranking})}
           >Zobacz tablicę wyników!</Button>
+
+          <Button style={{marginTop: '5%'}}
+                  onPress={() => navigation.navigate("VisitedPlacesScreen")}
+          >Zobacz odwiedzone miejsca</Button>
       </View>
       <Button style={{marginTop: 20}} onPress={onLogoutPressed}>Log out</Button>
     </ScrollView>
