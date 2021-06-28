@@ -1,0 +1,1 @@
+export const API_CONNECTION_ERROR = "API connection error. Probably you should check your internet connection."

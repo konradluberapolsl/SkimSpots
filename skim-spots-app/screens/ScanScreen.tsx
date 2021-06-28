@@ -15,6 +15,7 @@ import { postUserPlace } from "../api/postUserPlace";
 import { ThemeContext } from "../context/ThemeContext";
 import { getUserPointsByUserID } from "../api/getUserPointsByUserID";
 import { updateUserPoints } from "../api/updateUserPoints";
+import ApiConnectionErrorToast from "../components/ApiConnectionErrorToast";
 
 const ScanScreen = ({ navigation }: any) => {
   const { theme } = React.useContext(ThemeContext);
@@ -28,13 +29,23 @@ const ScanScreen = ({ navigation }: any) => {
   const { userPlaces, save } = React.useContext(PlaceContext);
   const { user } = React.useContext(AuthContext);
 
+  const [visibleToast, setVisibleToast] = React.useState(false);
+  const showToast = () => {
+    setVisibleToast(true);
+    setTimeout(() => setVisibleToast(false), 4000);
+  };
+
   useEffect(() => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
       setHasPermission(status === "granted");
     })();
 
-    getPlacesNames().then((data) => setPlacesName(data));
+    getPlacesNames()
+      .then((data) => setPlacesName(data))
+      .catch(() => {
+        showToast();
+      });
   }, []);
 
   useEffect(() => {
@@ -58,25 +69,45 @@ const ScanScreen = ({ navigation }: any) => {
                 setPlace(p!!.place);
                 break;
               } else if (userPlaces.indexOf(p) == userPlaces.length - 1) {
-                getPlaceByName(text[1]).then((res) => {
-                  setPlace(res);
-                  postUserPlace(res!!.id, user!!.id).then((r) => {
-                    save(user!!);
+                getPlaceByName(text[1])
+                  .then((res) => {
+                    setPlace(res);
+                    postUserPlace(res!!.id, user!!.id)
+                      .then((r) => {
+                        save(user!!);
+                      })
+                      .catch(() => {
+                        showToast();
+                      });
+                  })
+                  .catch(() => {
+                    showToast();
                   });
-                });
               }
             }
           } else {
-            getPlaceByName(text[1]).then((res) => {
-              setPlace(res);
-              postUserPlace(res!!.id, user!!.id).then((r) => {
-                save(user!!);
-                getUserPointsByUserID(user!!.id).then((d) => {
-                  let amount = d!!.amount + res!!.points;
-                  updateUserPoints(user!!.id, amount);
-                });
+            getPlaceByName(text[1])
+              .then((res) => {
+                setPlace(res);
+                postUserPlace(res!!.id, user!!.id)
+                  .then((r) => {
+                    save(user!!);
+                    getUserPointsByUserID(user!!.id)
+                      .then((d) => {
+                        let amount = d!!.amount + res!!.points;
+                        updateUserPoints(user!!.id, amount);
+                      })
+                      .catch(() => {
+                        showToast();
+                      });
+                  })
+                  .catch(() => {
+                    showToast();
+                  });
+              })
+              .catch(() => {
+                showToast();
               });
-            });
           }
         } else {
           setScanned(true);
@@ -106,6 +137,8 @@ const ScanScreen = ({ navigation }: any) => {
 
   return (
     <View style={styles.container}>
+      <ApiConnectionErrorToast visible={visibleToast} />
+
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={[StyleSheet.absoluteFillObject]}

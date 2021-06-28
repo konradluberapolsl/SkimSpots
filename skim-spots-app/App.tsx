@@ -9,6 +9,7 @@ import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import { PlaceProvider } from "./context/PlaceContext";
 import { ThemeContext, ThemeProvider } from "./context/ThemeContext";
+import { RootSiblingParent } from "react-native-root-siblings";
 
 const App = () => {
   const isLoadingComplete = useCachedResources();
@@ -28,16 +29,18 @@ const App = () => {
     return <AppLoading />;
   } else {
     return (
-      <ThemeProvider>
-        <PlaceProvider>
-          <AuthProvider>
-            <SafeAreaProvider>
-              <Navigation colorScheme={theme} />
-              <StatusBar />
-            </SafeAreaProvider>
-          </AuthProvider>
-        </PlaceProvider>
-      </ThemeProvider>
+      <RootSiblingParent>
+        <ThemeProvider>
+          <PlaceProvider>
+            <AuthProvider>
+              <SafeAreaProvider>
+                <Navigation colorScheme={theme} />
+                <StatusBar />
+              </SafeAreaProvider>
+            </AuthProvider>
+          </PlaceProvider>
+        </ThemeProvider>
+      </RootSiblingParent>
     );
   }
 };

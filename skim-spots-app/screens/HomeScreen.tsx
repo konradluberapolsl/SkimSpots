@@ -1,11 +1,21 @@
 import * as React from "react";
 import { StyleSheet } from "react-native";
-import { Text, View } from "../components/Themed";
+import { Button, Text, View } from "../components/Themed";
+import Toast from "react-native-root-toast";
+import { API_CONNECTION_ERROR } from "../constants/Strings";
+import ApiConnectionErrorToast from "../components/ApiConnectionErrorToast";
 
 const HomeScreen = () => {
+  const [visibleToast, setVisibleToast] = React.useState(false);
+  const showToast = () => {
+    setVisibleToast(true);
+    setTimeout(() => setVisibleToast(false), 3000);
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Home</Text>
+      <ApiConnectionErrorToast visible={visibleToast} />
     </View>
   );
 };
