@@ -22,6 +22,7 @@ const ScanScreen = ({ navigation }: any) => {
   const [placesNames, setPlacesName] = useState<string[]>([]);
   const [hasPermission, setHasPermission] = useState<any>(null);
   const [scanned, setScanned] = useState(false);
+  const [visited, setVisited] = useState(false);
   const [successScan, setSuccessScan] = useState(false);
   const [place, setPlace] = useState<Place>(null);
 
@@ -35,6 +36,7 @@ const ScanScreen = ({ navigation }: any) => {
     })();
 
     getPlacesNames().then((data) => setPlacesName(data));
+    //TODO: Get premium places.
   }, []);
 
   useEffect(() => {
@@ -44,38 +46,41 @@ const ScanScreen = ({ navigation }: any) => {
     }
   }, [place]);
 
+  const postPlaceAndUpdatePoints = (p : any) => {
+    postUserPlace(p!!.id, user!!.id).then(r => {
+      save(user!!);
+      getUserPointsByUserID(user!!.id).then((d) => {
+        let amount = d!!.amount + p!!.points;
+        updateUserPoints(user!!.id, amount);
+      });
+    });
+  };
+
   const handleBarCodeScanned = (scanningResult: BarCodeScannerResult) => {
     if (!scanned) {
       const { type, data } = scanningResult;
       const text = data.split(/\r?\n/);
+      let placeFound = false;
 
       if (text.length > 1) {
         if (placesNames.includes(text[1])) {
-          console.log("test");
           if (userPlaces.length !== 0) {
-            for (let p of userPlaces) {
-              if (p!!.place!!.name == text[1]) {
-                setPlace(p!!.place);
-                break;
-              } else if (userPlaces.indexOf(p) == userPlaces.length - 1) {
-                getPlaceByName(text[1]).then((res) => {
-                  setPlace(res);
-                  postUserPlace(res!!.id, user!!.id).then((r) => {
-                    save(user!!);
-                  });
-                });
+              for (let p of userPlaces ){
+                if (p!!.place!!.name == text[1]){
+                  setPlace(p!!.place);
+                  setVisited(true);
+                  placeFound = true;
+                  break;
+                }
               }
-            }
-          } else {
-            getPlaceByName(text[1]).then((res) => {
+          }
+          if (!placeFound) {
+            setVisited(false);
+            //TODO: CHECK IF PLACE IS PREMIUM - postPlaceAndUpdatePoints
+            //ELSE:
+            getPlaceByName(text[1]).then(res => {
               setPlace(res);
-              postUserPlace(res!!.id, user!!.id).then((r) => {
-                save(user!!);
-                getUserPointsByUserID(user!!.id).then((d) => {
-                  let amount = d!!.amount + res!!.points;
-                  updateUserPoints(user!!.id, amount);
-                });
-              });
+              postPlaceAndUpdatePoints(res);
             });
           }
         } else {
@@ -141,6 +146,13 @@ const ScanScreen = ({ navigation }: any) => {
               setScanned(false);
             }}
           />
+          {
+            visited &&
+            <Text style={[{ color: dialogTextColor,  marginBottom: 10 }, styles.resultDialogText]}>
+              Witaj ponownie!
+            </Text>
+          }
+
           <Image
             source={
               theme == "dark"
@@ -149,9 +161,20 @@ const ScanScreen = ({ navigation }: any) => {
             }
             style={{ width: 40, height: 60, marginBottom: 20 }}
           />
-          <Text style={[{ color: dialogTextColor }, styles.resultDialogText]}>
-            Za ten spot otrzymujesz:
-          </Text>
+
+          {
+            visited &&
+            <Text   style={[{ color: dialogTextColor }, styles.resultDialogText]}>
+              Za ten spot przytuliłeś/aś:
+            </Text>
+          }
+          {
+            !visited &&
+            <Text style={[{ color: dialogTextColor }, styles.resultDialogText]}>
+              Za ten spot otrzymujesz:
+            </Text>
+          }
+
           <Text style={[{ color: dialogTextColor }, styles.resultDialogText]}>
             {place!!.points} ptk
           </Text>

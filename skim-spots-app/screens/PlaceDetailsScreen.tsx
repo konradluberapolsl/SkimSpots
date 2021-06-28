@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Button, ScrollView, Text, View } from "../components/Themed";
 import { ActivityIndicator, SafeAreaView, StyleSheet } from "react-native";
 // @ts-ignore
@@ -13,6 +13,7 @@ import OwnComment from "../components/OwnComment";
 import { AuthContext } from "../context/AuthContext";
 import { postUserComment } from "../api/postUserComment";
 import { ThemeContext } from "../context/ThemeContext";
+import useColorScheme from "../hooks/useColorScheme";
 
 interface PlaceDetailsScreenProps {
   place: Place;
@@ -28,11 +29,13 @@ const PlaceDetailsScreen = (props: OwnProps) => {
   const { theme } = React.useContext(ThemeContext);
   const { REACT_APP_TEST_KEY } = process.env;
 
-  const secondaryTextColor = Colors["light"].secondaryText;
-  const foregroundColor = Colors["light"].foreground;
+
+
+  const secondaryTextColor = Colors[theme].secondaryText;
+  const foregroundColor = Colors[theme].foreground;
 
   const yourLocalIP: string =
-    REACT_APP_TEST_KEY !== undefined ? REACT_APP_TEST_KEY : "192.168.1.88";
+    REACT_APP_TEST_KEY !== undefined ? REACT_APP_TEST_KEY : "192.168.0.80";
 
   const [comments, setComments] = React.useState<PlaceComment[]>([]);
   const [photos, setPhotos] = React.useState<string[]>([]);
@@ -95,9 +98,9 @@ const PlaceDetailsScreen = (props: OwnProps) => {
         <View style={styles.topContent}>
           <Image
             source={
-              theme == "light"
-                ? require("../assets/images/logo-light.png")
-                : require("../assets/images/logo-dark.png")
+              theme == "dark"
+                  ? require("../assets/images/logo-light.png")
+                  : require("../assets/images/logo-dark.png")
             }
             style={[{ width: 40, height: 60, marginBottom: 20 }]}
           />
