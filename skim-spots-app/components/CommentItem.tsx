@@ -31,7 +31,7 @@ const CommentItem = ({ comment, style }: CommentItemProps) => {
           styles.commentContainer,
         ]}
       >
-        <Text lightColor={Colors[theme].secondaryText}>
+        <Text lightColor={Colors[theme].white}>
           {comment!!.content}
         </Text>
       </View>

@@ -22,7 +22,7 @@ export const ThemeProvider: React.FC = ({ children }) => {
         darkTheme,
         theme,
         toggleTheme: (value: boolean) => {
-          if (value === true) {
+          if (value) {
             setDarkTheme(true);
           } else {
             setDarkTheme(false);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, ScrollView, Text, View } from "../components/Themed";
 import { ActivityIndicator, SafeAreaView, StyleSheet } from "react-native";
 // @ts-ignore
@@ -13,6 +13,7 @@ import OwnComment from "../components/OwnComment";
 import { AuthContext } from "../context/AuthContext";
 import { postUserComment } from "../api/postUserComment";
 import { ThemeContext } from "../context/ThemeContext";
+import useColorScheme from "../hooks/useColorScheme";
 
 interface PlaceDetailsScreenProps {
   place: Place;
@@ -28,8 +29,8 @@ const PlaceDetailsScreen = (props: OwnProps) => {
   const { theme } = React.useContext(ThemeContext);
   const { REACT_APP_TEST_KEY } = process.env;
 
-  const secondaryTextColor = Colors["light"].secondaryText;
-  const foregroundColor = Colors["light"].foreground;
+  const secondaryTextColor = Colors[theme].secondaryText;
+  const foregroundColor = Colors[theme].foreground;
 
   const yourLocalIP: string =
     REACT_APP_TEST_KEY !== undefined ? REACT_APP_TEST_KEY : "192.168.1.88";
@@ -95,7 +96,7 @@ const PlaceDetailsScreen = (props: OwnProps) => {
         <View style={styles.topContent}>
           <Image
             source={
-              theme == "light"
+              theme == "dark"
                 ? require("../assets/images/logo-light.png")
                 : require("../assets/images/logo-dark.png")
             }

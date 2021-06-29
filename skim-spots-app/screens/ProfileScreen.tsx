@@ -22,14 +22,14 @@ const ProfileScreen = ({navigation} : any) => {
     const { logout} = React.useContext(AuthContext);
     const { user } = React.useContext(AuthContext);
 
-    React.useEffect(() => {
+/*    React.useEffect(() => {
         getUserPointsByUserID(user!!.id).then(r => {
             setUserPoints(r);
         });
         getUserPoints().then(r => {
             setRanking(r);
         })
-    },[])
+    },[])*/
 
     React.useEffect(() => {
             if(userPoints!=null){
@@ -54,6 +54,9 @@ const ProfileScreen = ({navigation} : any) => {
             // Call any action
             getUserPointsByUserID(user!!.id).then(r => {
                 setUserPoints(r);
+            });
+            getUserPoints().then(r => {
+                setRanking(r);
             });
         });
     }, [navigation]);
