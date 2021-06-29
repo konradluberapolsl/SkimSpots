@@ -42,7 +42,11 @@ const ScanScreen = ({ navigation }: any) => {
       setHasPermission(status === "granted");
     })();
 
-    getPlacesNames().then((data) => setPlacesName(data));
+    getPlacesNames()
+      .then((data) => setPlacesName(data))
+      .catch(() => {
+        showToast();
+      });
     //TODO: Get premium places.
   }, []);
 
@@ -54,13 +58,17 @@ const ScanScreen = ({ navigation }: any) => {
   }, [place]);
 
   const postPlaceAndUpdatePoints = (p: any) => {
-    postUserPlace(p!!.id, user!!.id).then((r) => {
-      save(user!!);
-      getUserPointsByUserID(user!!.id).then((d) => {
-        let amount = d!!.amount + p!!.points;
-        updateUserPoints(user!!.id, amount);
+    postUserPlace(p!!.id, user!!.id)
+      .then((r) => {
+        save(user!!);
+        getUserPointsByUserID(user!!.id).then((d) => {
+          let amount = d!!.amount + p!!.points;
+          updateUserPoints(user!!.id, amount);
+        });
+      })
+      .catch(() => {
+        showToast();
       });
-    });
   };
 
   const handleBarCodeScanned = (scanningResult: BarCodeScannerResult) => {
@@ -85,10 +93,14 @@ const ScanScreen = ({ navigation }: any) => {
             setVisited(false);
             //TODO: CHECK IF PLACE IS PREMIUM - postPlaceAndUpdatePoints
             //ELSE:
-            getPlaceByName(text[1]).then((res) => {
-              setPlace(res);
-              postPlaceAndUpdatePoints(res);
-            });
+            getPlaceByName(text[1])
+              .then((res) => {
+                setPlace(res);
+                postPlaceAndUpdatePoints(res);
+              })
+              .catch(() => {
+                showToast();
+              });
           }
         } else {
           setScanned(true);
