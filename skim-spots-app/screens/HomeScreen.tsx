@@ -49,7 +49,7 @@ return (
             return (
               <View style={styles.card}>
                 <Pressable onPressIn={() => {setBlur(15)}} onPressOut={() => {setBlur(0)}} >
-                  <Image style={styles.cardImage} source={{uri:'https://lorempixel.com/400/200/nature/4/'}} blurRadius={blur}></Image>
+                  <Image style={styles.cardImage} source={{ uri: `http://${yourLocalIP}:8000${item?.place!!.pathToImages}1.jpg` }} blurRadius={blur}></Image>
                 </Pressable>
                   {blur != 0 && <Text style={{fontWeight:'bold', fontSize:28, position: 'absolute',textAlign: "center",}}>{item?.place?.name}</Text>}
                   {blur !=0 && <Text style={{fontSize:35, position: 'absolute',paddingTop: 120,}}>{item?.place?.points}+{item?.premiumPoint} pkt</Text>}
