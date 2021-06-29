@@ -1,5 +1,5 @@
 const { REACT_APP_TEST_KEY } = process.env;
-const yourLocalIP : string = REACT_APP_TEST_KEY !== undefined ? REACT_APP_TEST_KEY : "192.168.1.88"
+const yourLocalIP : string = REACT_APP_TEST_KEY !== undefined ? REACT_APP_TEST_KEY : "192.168.1.22"
 
 const url: string = `http://${yourLocalIP}:8000/api`
 
