@@ -38,7 +38,7 @@ const BottomTabNavigator = () => {
           if (route.name == "Profile") {
             iconName = "person";
           } else if (route.name == "Home") {
-            iconName = "home";
+            iconName = "flame";
           } else if (route.name == "Scan") {
             iconName = "scan-outline";
           } else if (route.name == "Settings") iconName = "settings";
@@ -52,6 +52,7 @@ const BottomTabNavigator = () => {
     >
       <BottomTab.Screen
         name="Profile"
+
         component={ProfileNavigator}
         options={{}}
       />
