@@ -43,8 +43,8 @@ const HomeScreen = (props: OwnProps) => {
 
 return (
     <View style={styles.container}>
-        <Text style={styles.title}>Today's power spots.</Text>
-        <Text style={styles.subtitle}>Find those spots and get extra points!</Text>
+        <Text style={styles.title}>Dzisiejsze power spoty.</Text>
+        <Text style={styles.subtitle}>Znajdź je i zgadnij dodatkowe punkty!</Text>
         <FlatList
           data={premiumPlaces}
           keyExtractor={item => item!!.id.toString()}

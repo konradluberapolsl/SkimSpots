@@ -127,7 +127,7 @@ const ScanScreen = ({ navigation }: any) => {
             setSuccessScan(false);
           }}
         >
-          Scan Again
+          Skanuj ponownie
         </Button>
       )}
 

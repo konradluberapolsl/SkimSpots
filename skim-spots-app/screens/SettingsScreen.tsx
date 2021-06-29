@@ -21,13 +21,13 @@ const SettingsScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Settings</Text>
+      <Text style={styles.title}>Ustawienia</Text>
       <View style={styles.row}>
-        <Text style={styles.settingLabel}>System theme</Text>
+        <Text style={styles.settingLabel}>Motyw systemowy</Text>
         <Switch value={systemTheme} onValueChange={setSystemColorScheme} />
       </View>
       <View style={styles.row}>
-        <Text style={styles.settingLabel}>Dark mode</Text>
+        <Text style={styles.settingLabel}>Motyw ciemny</Text>
         <Switch
           value={darkTheme}
           onValueChange={toggleTheme}

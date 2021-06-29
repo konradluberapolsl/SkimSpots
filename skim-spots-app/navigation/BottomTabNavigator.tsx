@@ -28,6 +28,19 @@ const BottomTab = createMaterialBottomTabNavigator<BottomTabParamList>();
 
 const BottomTabNavigator = () => {
   const { theme } = React.useContext(ThemeContext);
+
+  const label = function label(route : any) : string{
+      if (route.name == "Profile") {
+          return "Profil";
+      } else if (route.name == "Home") {
+          return "Power Spots";
+      } else if (route.name == "Scan") {
+          return "Skanuj";
+      } else if (route.name == "Settings")
+          return "Ustawienia";
+      return ""
+  }
+
   return (
     <BottomTab.Navigator
       initialRouteName="Profile"
@@ -47,14 +60,18 @@ const BottomTabNavigator = () => {
           // @ts-ignore
           return <Ionicons name={iconName} size={23} color={color} />;
         },
-      })}
+          tabBarLabel: label(route),
+      }
+      )}
       barStyle={{ backgroundColor: Colors[theme].foreground }}
+
     >
       <BottomTab.Screen
         name="Profile"
 
         component={ProfileNavigator}
-        options={{}}
+        options={{
+        }}
       />
       <BottomTab.Screen name="Home" component={HomeNavigator} />
 
