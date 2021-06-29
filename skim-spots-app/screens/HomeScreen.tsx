@@ -51,13 +51,13 @@ const styles = StyleSheet.create({
   },
   title: {
     marginTop: 15,
-    fontSize: 35,
+    fontSize: 31,
     textAlign: "center",
     fontFamily: "OpenSans-Light",
   },
   subtitle: {
     fontFamily: "OpenSans-Light",
-    fontSize: 20,
+    fontSize: 16,
     textAlign: "center",
     paddingTop: 10,
   },

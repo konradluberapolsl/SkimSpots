@@ -37,8 +37,8 @@ const PremiumPlaceItem = ({ premiumPlace }: PremiumPlaceItemProps) => {
       >
         <Image
           style={{
-            width: 0.45 * Layout.window.height,
-            height: 0.27 * Layout.window.height,
+            width: 0.46 * Layout.window.height,
+            height: 0.28 * Layout.window.height,
             borderRadius: 20,
           }}
           source={{
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   },
   card: {
     marginVertical: 8,
-    paddingTop: 20,
+    paddingTop: 15,
     flexBasis: "47%",
     marginHorizontal: 5,
     borderRadius: 50,

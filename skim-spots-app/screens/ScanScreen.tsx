@@ -16,7 +16,7 @@ import { ThemeContext } from "../context/ThemeContext";
 import { getUserPointsByUserID } from "../api/getUserPointsByUserID";
 import { updateUserPoints } from "../api/updateUserPoints";
 import PremiumPlace from "../types/PremiumPlace";
-import {getCurrentPremiumPlaces} from "../api/getCurrentPremiumPlaces";
+import { getCurrentPremiumPlaces } from "../api/getCurrentPremiumPlaces";
 
 const ScanScreen = ({ navigation }: any) => {
   const { theme } = React.useContext(ThemeContext);
@@ -42,9 +42,9 @@ const ScanScreen = ({ navigation }: any) => {
     })();
 
     getPlacesNames().then((data) => setPlacesName(data));
-    getCurrentPremiumPlaces().then(r => {
+    getCurrentPremiumPlaces().then((r) => {
       setPremiumPlaces(r);
-    })
+    });
   }, []);
 
   useEffect(() => {
@@ -54,8 +54,8 @@ const ScanScreen = ({ navigation }: any) => {
     }
   }, [place]);
 
-  const postPlaceAndUpdatePoints = (p : any, additionalPoints: number) => {
-    postUserPlace(p.id, user!!.id).then(r => {
+  const postPlaceAndUpdatePoints = (p: any, additionalPoints: number) => {
+    postUserPlace(p.id, user!!.id).then((r) => {
       save(user!!);
       getUserPointsByUserID(user!!.id).then((d) => {
         let amount = d!!.amount + p!!.points + additionalPoints;
@@ -74,20 +74,20 @@ const ScanScreen = ({ navigation }: any) => {
       if (text.length > 1) {
         if (placesNames.includes(text[1])) {
           if (userPlaces.length !== 0) {
-              for (let p of userPlaces ){
-                if (p!!.place!!.name == text[1]){
-                  setPlace(p!!.place);
-                  setVisited(true);
-                  placeFound = true;
-                  break;
-                }
+            for (let p of userPlaces) {
+              if (p!!.place!!.name == text[1]) {
+                setPlace(p!!.place);
+                setVisited(true);
+                placeFound = true;
+                break;
               }
+            }
           }
           if (!placeFound) {
             setVisited(false);
-            if(premiumPlaces.length != 0){
-              for(let p of premiumPlaces){
-                if(p!!.place!!.name == text[1]){
+            if (premiumPlaces.length != 0) {
+              for (let p of premiumPlaces) {
+                if (p!!.place!!.name == text[1]) {
                   power = true;
                   setPlace(p!!.place!!);
                   setPremium(true);
@@ -97,8 +97,8 @@ const ScanScreen = ({ navigation }: any) => {
                 }
               }
             }
-            if(!power){
-              getPlaceByName(text[1]).then(res => {
+            if (!power) {
+              getPlaceByName(text[1]).then((res) => {
                 setPlace(res);
                 postPlaceAndUpdatePoints(res, 0);
               });
@@ -167,12 +167,16 @@ const ScanScreen = ({ navigation }: any) => {
               setScanned(false);
             }}
           />
-          {
-            visited &&
-            <Text style={[{ color: dialogTextColor,  marginBottom: 10 }, styles.resultDialogText]}>
+          {visited && (
+            <Text
+              style={[
+                { color: dialogTextColor, marginBottom: 10 },
+                styles.resultDialogText,
+              ]}
+            >
               Witaj ponownie!
             </Text>
-          }
+          )}
 
           <Image
             source={
@@ -183,42 +187,47 @@ const ScanScreen = ({ navigation }: any) => {
             style={{ width: 40, height: 60, marginBottom: 20 }}
           />
 
-          {
-            visited &&
-            <Text   style={[{ color: dialogTextColor }, styles.resultDialogText]}>
+          {visited && (
+            <Text style={[{ color: dialogTextColor }, styles.resultDialogText]}>
               Za ten spot przytuliłeś/aś:
             </Text>
-          }
-          {
-            !visited &&
+          )}
+          {!visited && (
             <Text style={[{ color: dialogTextColor }, styles.resultDialogText]}>
               Za ten spot otrzymujesz:
             </Text>
-          }
+          )}
 
           <Text style={[{ color: dialogTextColor }, styles.resultDialogText]}>
             {place!!.points} pkt
           </Text>
 
-          {
-            isPremium &&
-            <Text   style={[{ color: dialogTextColor , marginTop: 10 }, styles.resultDialogText]}>
+          {isPremium && (
+            <Text
+              style={[
+                { color: dialogTextColor, marginTop: 10 },
+                styles.resultDialogText,
+              ]}
+            >
               Gratulacje!
             </Text>
-          }
+          )}
 
-          {
-            isPremium &&
-            <Text   style={[{ color: dialogTextColor  }, styles.resultDialogText]}>
+          {isPremium && (
+            <Text style={[{ color: dialogTextColor }, styles.resultDialogText]}>
               To Power Spot, otrzymujesz:
             </Text>
-          }
-          {
-            isPremium &&
-            <Text   style={[{ color: dialogTextColor, fontFamily: "OpenSans-Regular"  }, styles.resultDialogText]}>
+          )}
+          {isPremium && (
+            <Text
+              style={[
+                { color: dialogTextColor, fontFamily: "OpenSans-Regular" },
+                styles.resultDialogText,
+              ]}
+            >
               + {additionalPoints} pkt
             </Text>
-          }
+          )}
 
           <Text
             style={[
@@ -257,10 +266,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 50,
     borderRadius: 15,
     width: "90%",
-    height: "75%",
+    height: "80%",
   },
   resultDialogText: {
-    fontSize: 24,
+    fontSize: 16,
     textAlign: "center",
   },
   scanAgainButton: {

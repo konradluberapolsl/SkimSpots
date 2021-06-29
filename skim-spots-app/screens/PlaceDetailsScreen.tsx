@@ -137,7 +137,7 @@ const PlaceDetailsScreen = (props: OwnProps) => {
           parentWidth={width}
         />
 
-        <Text style={{ fontSize: 20, marginTop: 25 }}>
+        <Text style={{ fontSize: 18, marginTop: 25 }}>
           {place!!.information}
         </Text>
         <Text
@@ -218,6 +218,7 @@ const styles = StyleSheet.create({
   },
   commentsContainer: {
     marginTop: 30,
+    marginRight: 40,
   },
   button: {
     marginTop: 20,
