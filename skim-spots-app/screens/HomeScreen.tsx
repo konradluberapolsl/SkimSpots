@@ -52,7 +52,7 @@ return (
                   <Image style={styles.cardImage} source={{ uri: `http://${yourLocalIP}:8000${item?.place!!.pathToImages}1.jpg` }} blurRadius={blur}></Image>
                 </Pressable>
                   {blur != 0 && <Text style={{fontWeight:'bold', fontSize:28, position: 'absolute',textAlign: "center",}}>{item?.place?.name}</Text>}
-                  {blur !=0 && <Text style={{fontSize:35, position: 'absolute',paddingTop: 120,}}>{item?.place?.points}+{item?.premiumPoint} pkt</Text>}
+                  {blur !=0 && <Text style={{fontSize:35, position: 'absolute',paddingTop: 120,}}>{item?.place?.points} + {item?.premiumPoints} pkt</Text>}
               </View>
             )
           }}/>

@@ -4,7 +4,7 @@ type PremiumPlace = null | {
     id: number;
     place: Place;
     date: Date;
-    premiumPoint: number;
+    premiumPoints: number;
     placeId: number;
 }
 
