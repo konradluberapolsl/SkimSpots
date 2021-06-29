@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "skim-spots-app",
-    "slug": "skim-spots-app",
+    "name": "SkimSpots",
+    "slug": "SkimSpots",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
