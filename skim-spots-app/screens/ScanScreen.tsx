@@ -15,6 +15,8 @@ import { postUserPlace } from "../api/postUserPlace";
 import { ThemeContext } from "../context/ThemeContext";
 import { getUserPointsByUserID } from "../api/getUserPointsByUserID";
 import { updateUserPoints } from "../api/updateUserPoints";
+import PremiumPlace from "../types/PremiumPlace";
+import {getCurrentPremiumPlaces} from "../api/getCurrentPremiumPlaces";
 
 const ScanScreen = ({ navigation }: any) => {
   const { theme } = React.useContext(ThemeContext);
@@ -23,8 +25,12 @@ const ScanScreen = ({ navigation }: any) => {
   const [hasPermission, setHasPermission] = useState<any>(null);
   const [scanned, setScanned] = useState(false);
   const [visited, setVisited] = useState(false);
+  const [isPremium, setPremium] = useState(false);
   const [successScan, setSuccessScan] = useState(false);
+
   const [place, setPlace] = useState<Place>(null);
+  const [premiumPlaces, setPremiumPlaces] = React.useState<PremiumPlace[]>([]);
+  const [additionalPoints, setAdditionalPoints] = React.useState(0);
 
   const { userPlaces, save } = React.useContext(PlaceContext);
   const { user } = React.useContext(AuthContext);
@@ -36,7 +42,9 @@ const ScanScreen = ({ navigation }: any) => {
     })();
 
     getPlacesNames().then((data) => setPlacesName(data));
-    //TODO: Get premium places.
+    getCurrentPremiumPlaces().then(r => {
+      setPremiumPlaces(r);
+    })
   }, []);
 
   useEffect(() => {
@@ -46,11 +54,11 @@ const ScanScreen = ({ navigation }: any) => {
     }
   }, [place]);
 
-  const postPlaceAndUpdatePoints = (p : any) => {
-    postUserPlace(p!!.id, user!!.id).then(r => {
+  const postPlaceAndUpdatePoints = (p : any, additionalPoints: number) => {
+    postUserPlace(p.id, user!!.id).then(r => {
       save(user!!);
       getUserPointsByUserID(user!!.id).then((d) => {
-        let amount = d!!.amount + p!!.points;
+        let amount = d!!.amount + p!!.points + additionalPoints;
         updateUserPoints(user!!.id, amount);
       });
     });
@@ -60,8 +68,9 @@ const ScanScreen = ({ navigation }: any) => {
     if (!scanned) {
       const { type, data } = scanningResult;
       const text = data.split(/\r?\n/);
+      setPremium(false);
       let placeFound = false;
-
+      let power = false;
       if (text.length > 1) {
         if (placesNames.includes(text[1])) {
           if (userPlaces.length !== 0) {
@@ -76,12 +85,24 @@ const ScanScreen = ({ navigation }: any) => {
           }
           if (!placeFound) {
             setVisited(false);
-            //TODO: CHECK IF PLACE IS PREMIUM - postPlaceAndUpdatePoints
-            //ELSE:
-            getPlaceByName(text[1]).then(res => {
-              setPlace(res);
-              postPlaceAndUpdatePoints(res);
-            });
+            if(premiumPlaces.length != 0){
+              for(let p of premiumPlaces){
+                if(p!!.place!!.name == text[1]){
+                  power = true;
+                  setPlace(p!!.place!!);
+                  setPremium(true);
+                  setAdditionalPoints(p!!.premiumPoints);
+                  postPlaceAndUpdatePoints(p!!.place!!, p!!.premiumPoints);
+                  break;
+                }
+              }
+            }
+            if(!power){
+              getPlaceByName(text[1]).then(res => {
+                setPlace(res);
+                postPlaceAndUpdatePoints(res, 0);
+              });
+            }
           }
         } else {
           setScanned(true);
@@ -127,7 +148,7 @@ const ScanScreen = ({ navigation }: any) => {
             setSuccessScan(false);
           }}
         >
-          Scan Again
+          Skanuj ponownie
         </Button>
       )}
 
@@ -176,8 +197,29 @@ const ScanScreen = ({ navigation }: any) => {
           }
 
           <Text style={[{ color: dialogTextColor }, styles.resultDialogText]}>
-            {place!!.points} ptk
+            {place!!.points} pkt
           </Text>
+
+          {
+            isPremium &&
+            <Text   style={[{ color: dialogTextColor , marginTop: 10 }, styles.resultDialogText]}>
+              Gratulacje!
+            </Text>
+          }
+
+          {
+            isPremium &&
+            <Text   style={[{ color: dialogTextColor  }, styles.resultDialogText]}>
+              To Power Spot, otrzymujesz:
+            </Text>
+          }
+          {
+            isPremium &&
+            <Text   style={[{ color: dialogTextColor, fontFamily: "OpenSans-Regular"  }, styles.resultDialogText]}>
+              + {additionalPoints} pkt
+            </Text>
+          }
+
           <Text
             style={[
               { color: dialogTextColor, marginTop: 100 },

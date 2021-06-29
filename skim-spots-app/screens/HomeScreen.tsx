@@ -1,30 +1,75 @@
 import * as React from "react";
-import { StyleSheet } from "react-native";
-import { Text, View } from "../components/Themed";
+import { 
+  getCurrentPremiumPlaces } from "../api/getCurrentPremiumPlaces";
+import { 
+  Text, 
+  View } from "../components/Themed";
+import {
+  StyleSheet,
+  Image,
+  FlatList,
+  Pressable,
+} from 'react-native';
+import { 
+  ThemeContext } from "../context/ThemeContext";
+import Colors from "../constants/Colors";
+import PremiumPlace from "../types/PremiumPlace";
+import PremiumPlaceItem from "../components/PremiumPlaceItem";
 
-const HomeScreen = () => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Home</Text>
-    </View>
+interface OwnProps {
+  route: any;
+  navigation: any;
+}
+
+const HomeScreen = (props: OwnProps) => {
+  const { REACT_APP_TEST_KEY } = process.env;
+  const yourLocalIP: string =
+    REACT_APP_TEST_KEY !== undefined ? REACT_APP_TEST_KEY : "192.168.0.80";
+  const [premiumPlaces, setPremiumPlaces] = React.useState<PremiumPlace[]>([]);
+
+  React.useEffect(() => {
+    getCurrentPremiumPlaces().then(r => {
+        setPremiumPlaces(r);
+    })
+},[])
+
+  const [blur, setBlur] = React.useState(0);
+
+  const renderItem = ( {item} : any ) => (
+      <PremiumPlaceItem
+          premiumPlace={item}/>
   );
-};
 
+
+return (
+    <View style={styles.container}>
+        <Text style={styles.title}>Dzisiejsze power spoty.</Text>
+        <Text style={styles.subtitle}>Znajdź je i zgadnij dodatkowe punkty!</Text>
+        <FlatList
+          data={premiumPlaces}
+          keyExtractor={item => item!!.id.toString()}
+          renderItem={renderItem}
+        />
+      </View>
+);
+}
+  
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+  container:{
+    flex:1,
   },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
+  title:{
+    marginTop: 15,
+    fontSize:35,
+    textAlign: "center",
+    fontFamily: "OpenSans-Light",
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
+  subtitle:{
+    fontFamily: "OpenSans-Light",
+    fontSize:20,
+    textAlign: "center",
+    paddingTop:10,
   },
-});
+}); 

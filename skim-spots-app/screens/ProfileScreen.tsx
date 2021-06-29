@@ -9,6 +9,7 @@ import {getUserPointsByUserID} from "../api/getUserPointsByUserID";
 import useColorScheme from "../hooks/useColorScheme";
 import Colors from "../constants/Colors";
 import {getPlaceComments} from "../api/getPlaceComments";
+import {ThemeContext} from "../context/ThemeContext";
 
 const ProfileScreen = ({navigation} : any) => {
 
@@ -17,7 +18,8 @@ const ProfileScreen = ({navigation} : any) => {
     const [position, setPosition] = React.useState(0);
     const [text, setText] = React.useState("");
 
-    const colorScheme = useColorScheme();
+
+    const { theme } = React.useContext(ThemeContext);
 
     const { logout} = React.useContext(AuthContext);
     const { user } = React.useContext(AuthContext);
@@ -82,13 +84,16 @@ const ProfileScreen = ({navigation} : any) => {
       <Text style={{fontSize: 20, marginTop: 10}} >Zgromadziłeś:</Text>
       <View style={styles.centeredContent}>
         <Image
-            source={require("../assets/images/logo-white.png") }
+            source={ theme == "dark"
+                        ? require("../assets/images/logo-white.png")
+                        : require("../assets/images/logo-dark.png")
+            }
             resizeMethod="resize"
             resizeMode="contain"
             style={[{width: 30, height: 50, marginTop: 20}]}
         />
           {userPoints!=null &&
-          <Text lightColor={'#FFF'} darkColor={'#FFF'} style={{fontFamily: "OpenSans-Bold", marginTop: 5, fontSize: 22 }}>
+          <Text  style={{fontFamily: "OpenSans-Bold", color: Colors[theme].secondaryText, marginTop: 5, fontSize: 22 }}>
               {userPoints!!.amount} pkt
           </Text>
           }
@@ -97,7 +102,7 @@ const ProfileScreen = ({navigation} : any) => {
           </Text>
 
           <Text style={{marginTop: '27%', fontSize: 25}}>Jesteś:</Text>
-          {position!=0 && <Text style={[{color: Colors[colorScheme].white}, styles.position]}>{position}</Text> }
+          {position!=0 && <Text style={[{color: Colors[theme].secondaryText}, styles.position]}>{position}</Text> }
           <Text style={{marginTop: 25, fontSize: 25}}>w rankingu SKIM SPOTS!</Text>
 
           <Button style={{marginTop: '10%'}}

@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { Button, ScrollView, Text, View } from "../components/Themed";
 import { ActivityIndicator, SafeAreaView, StyleSheet } from "react-native";
 // @ts-ignore
@@ -28,8 +28,6 @@ const PlaceDetailsScreen = (props: OwnProps) => {
   const { place }: PlaceDetailsScreenProps = props.route.params;
   const { theme } = React.useContext(ThemeContext);
   const { REACT_APP_TEST_KEY } = process.env;
-
-
 
   const secondaryTextColor = Colors[theme].secondaryText;
   const foregroundColor = Colors[theme].foreground;
@@ -99,8 +97,8 @@ const PlaceDetailsScreen = (props: OwnProps) => {
           <Image
             source={
               theme == "dark"
-                  ? require("../assets/images/logo-light.png")
-                  : require("../assets/images/logo-dark.png")
+                ? require("../assets/images/logo-light.png")
+                : require("../assets/images/logo-dark.png")
             }
             style={[{ width: 40, height: 60, marginBottom: 20 }]}
           />

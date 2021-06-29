@@ -1,6 +1,7 @@
 const { REACT_APP_TEST_KEY } = process.env;
 const yourLocalIP : string = REACT_APP_TEST_KEY !== undefined ? REACT_APP_TEST_KEY : "192.168.0.80"
 
+
 const url: string = `http://${yourLocalIP}:8000/api`
 
 export async function client( endpoint: string, query: string, options = {}) : Promise<any> {
