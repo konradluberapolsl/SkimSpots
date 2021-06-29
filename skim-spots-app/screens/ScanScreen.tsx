@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet } from "react-native";
+import { ActivityIndicator, StyleSheet } from "react-native";
 import { Text, View, Button } from "../components/Themed";
 import { Appbar } from "react-native-paper"; // <-- TEMP!!!!! TODO: Find better solution.
 import Place from "../types/Place";
@@ -27,8 +27,11 @@ const ScanScreen = ({ navigation }: any) => {
   const [successScan, setSuccessScan] = useState(false);
   const [place, setPlace] = useState<Place>(null);
 
+  const [isLoading, setIsLoading] = React.useState(true);
+
   const { userPlaces, save } = React.useContext(PlaceContext);
   const { user } = React.useContext(AuthContext);
+  const foregroundColor = Colors[theme].foreground;
 
   const [visibleToast, setVisibleToast] = React.useState(false);
   const showToast = () => {
@@ -41,9 +44,12 @@ const ScanScreen = ({ navigation }: any) => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
       setHasPermission(status === "granted");
     })();
-
+    setIsLoading(true);
     getPlacesNames()
-      .then((data) => setPlacesName(data))
+      .then((data) => {
+        setPlacesName(data);
+        setIsLoading(false);
+      })
       .catch(() => {
         showToast();
       });
@@ -132,10 +138,14 @@ const ScanScreen = ({ navigation }: any) => {
     <View style={styles.container}>
       <ApiConnectionErrorToast visible={visibleToast} />
 
-      <BarCodeScanner
-        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        style={[StyleSheet.absoluteFillObject]}
-      />
+      {isLoading ? (
+        <ActivityIndicator size="large" color={foregroundColor} />
+      ) : (
+        <BarCodeScanner
+          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+          style={[StyleSheet.absoluteFillObject]}
+        />
+      )}
 
       {scanned && !successScan && (
         <Button
