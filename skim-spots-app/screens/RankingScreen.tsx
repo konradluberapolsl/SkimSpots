@@ -13,6 +13,7 @@ import {
     AuthContext } from "../context/AuthContext";
 import UserPoints from "../types/UserPoints";
 import RankingScreenItem from "../components/RankingScreenItem";
+import {getUserPointsByUserID} from "../api/getUserPointsByUserID";
 
 interface OwnProps{
     route: any,
@@ -25,10 +26,20 @@ const RankingScreen = (props: OwnProps) => {
     const [ranking, setRanking] = React.useState<UserPoints[]>([]);
 
 
+    React.useEffect(() => { //TODO: IMO NOT VERY GOOD SOLUTION, MAYBE THINK ABOUT OTHER.
+        // Return the function to unsubscribe from the event so it gets removed on unmount
+        return props.navigation.addListener('focus', () => {
+            // The screen is focused
+            // Call any action
+            getUserPoints().then(r => {
+                setRanking(r);
+            })
+        });
+    }, [props.navigation]);
+
+
     React.useEffect(() => {
-        getUserPoints().then(r => {
-            setRanking(r);
-        })
+
     },[])
 
     const renderItem = ( {item} : any ) => (
