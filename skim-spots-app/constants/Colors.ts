@@ -5,7 +5,7 @@ export default {
   light: {
     white: '#fff',
     text: '#2B2D53',
-    secondaryText: '#fff',
+    secondaryText: '#000000',
     foreground: '#807585',
     background: '#FFF4ED',
     tint: tintColorLight,
