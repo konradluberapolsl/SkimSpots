@@ -33,7 +33,7 @@ const PlaceDetailsScreen = (props: OwnProps) => {
   const foregroundColor = Colors[theme].foreground;
 
   const yourLocalIP: string =
-    REACT_APP_TEST_KEY !== undefined ? REACT_APP_TEST_KEY : "192.168.1.88";
+    REACT_APP_TEST_KEY !== undefined ? REACT_APP_TEST_KEY : "192.168.0.80";
 
   const [comments, setComments] = React.useState<PlaceComment[]>([]);
   const [photos, setPhotos] = React.useState<string[]>([]);

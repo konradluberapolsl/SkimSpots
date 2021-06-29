@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Appbar } from "react-native-paper";
-import { StyleSheet, Image, Pressable, TouchableOpacity } from "react-native";
+import { StyleSheet, Image, Pressable, TouchableOpacity, View as DefaultView } from "react-native";
 import Colors from "../constants/Colors";
 import PremiumPlace from "../types/PremiumPlace";
 import { View, Text } from "./Themed";
@@ -19,13 +19,29 @@ const PremiumPlaceItem = ({ premiumPlace}: PremiumPlaceItemProps) => {
 
     const { theme } = React.useContext(ThemeContext);
     const [blur, setBlur] = React.useState(0);
+
     return (
-        <View style={styles.card}>
+        <View style={ styles.card}>
           <Pressable onPressIn={() => {setBlur(15)}} onPressOut={() => {setBlur(0)}} >
-            <Image style={styles.cardImage} source={{ uri: `http://${yourLocalIP}:8000${premiumPlace?.place!!.pathToImages}1.jpg` }} blurRadius={blur}></Image>
+
+              <Image style={{width: ( 0.42 * Layout.window.height), height: (0.25 * Layout.window.height), borderRadius: 20, }}
+                   source={{ uri: `http://${yourLocalIP}:8000${premiumPlace!!.place!!.pathToImages}1.jpg` }} blurRadius={blur} />
+
+              <DefaultView style={[styles.cardOverlay,{borderColor: Colors[theme].text}]}>
+                  {blur != 0 &&
+                  <Image
+                      source={require("../assets/images/logo-white.png") }
+                      resizeMethod="resize"
+                      resizeMode="contain"
+                      style={[{width: 30, height: 50, marginTop: 20}]}
+                  />
+                  }
+                  {blur != 0 && <Text style={[styles.text,{fontSize:35, }]}>{premiumPlace?.place?.points}+{premiumPlace?.premiumPoints} pkt</Text>}
+                  {blur != 0 && <Text style={[styles.text,{fontSize:28}]}>{premiumPlace?.place?.estimatedLocalization}</Text>}
+              </DefaultView>
+
           </Pressable>
-            {blur != 0 && <Text style={{fontWeight:'bold', fontSize:28, position: 'absolute',textAlign: "center",}}>{premiumPlace?.place?.name}</Text>}
-            {blur !=0 && <Text style={{fontSize:35, position: 'absolute',paddingTop: 120,}}>{premiumPlace?.place?.points}+{premiumPlace?.premiumPoints} pkt</Text>}
+
         </View>
       )
   };
@@ -36,20 +52,26 @@ const PremiumPlaceItem = ({ premiumPlace}: PremiumPlaceItemProps) => {
     item:{
         marginVertical: 8,
         marginHorizontal: 16,
-        borderRadius: 20,
-        borderWidth: 1,
         flexDirection: "column",
-        alignItems: "flex-start",
-        justifyContent: "center"
+        alignItems: "center",
+        justifyContent: "center",
     },
-    title: {
+      cardOverlay:{
+          position: 'absolute',
+          borderWidth: 0.5,
+          borderRadius: 20,
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          justifyContent: 'center',
+          alignItems: 'center'
+      },
+    text: {
         fontSize: 20,
         fontFamily: "OpenSans-Light",
-    },
-    separator: {
-        marginVertical: 30,
-        height: 1,
-        width: "80%",
+        marginVertical: 5,
+        color: "#fff"
     },
     card:{
         marginVertical: 8,
@@ -60,11 +82,5 @@ const PremiumPlaceItem = ({ premiumPlace}: PremiumPlaceItemProps) => {
         justifyContent: 'center', 
         alignItems: 'center',
         textAlign: "center",
-      },
-      cardImage:{
-        flex: 1,
-        height: 250,
-        width: 350,
-        borderRadius: 50,
-      },
+      }
 });
