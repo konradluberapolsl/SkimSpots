@@ -1,1 +1,1 @@
-export const API_CONNECTION_ERROR = "API connection error. Probably you should check your internet connection."
+export const API_CONNECTION_ERROR = "Błąd połączenia z API. Prawdopodobnie powinieneś sprawdzić swoje połączenie z internetem."
