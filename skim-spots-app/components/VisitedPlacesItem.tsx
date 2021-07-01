@@ -10,34 +10,16 @@ import Layout from "../constants/Layout";
 
 
 
-const RankingScreen = ({place, onPress} : any) => {
+const VisitedPlacesItem = ({place, onPress} : any) => {
 
     const { REACT_APP_TEST_KEY } = process.env;
     const yourLocalIP: string =
         REACT_APP_TEST_KEY !== undefined ? REACT_APP_TEST_KEY : "192.168.0.80";
 
-
-
     const { theme } = React.useContext(ThemeContext);
-
-    //const [blur, setBlur] = React.useState(0); <--- Remek
 
     return (
         <View style={[styles.item,{borderColor: Colors[theme].text}]}>
-
-
-{/*  Remek -->           <Pressable onPressIn={() => setBlur(15)} onPressOut={() => setBlur(0)} >
-                <Image
-                    source={{ uri: `http://${yourLocalIP}:8000${place!!.pathToImages}1.jpg` }}
-                    resizeMethod="resize"
-                    blurRadius={blur}
-                    // resizeMode="contain"
-                    style={{width: ( 0.42 * Layout.window.height), height: (0.25 * Layout.window.height), borderRadius: 20, }}
-                />
-            </Pressable>*/}
-
-
-
             <TouchableOpacity onPress={onPress}>
                 <Image
                 source={{ uri: `http://${yourLocalIP}:8000${place!!.pathToImages}1.jpg` }}
@@ -56,11 +38,10 @@ const RankingScreen = ({place, onPress} : any) => {
     );
 };
 
-export default RankingScreen;
+export default VisitedPlacesItem;
 
 const styles = StyleSheet.create({
     item:{
-
         marginVertical: 8,
         marginHorizontal: 16,
         borderRadius: 20,
@@ -72,10 +53,5 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 20,
         fontFamily: "OpenSans-Light",
-    },
-    separator: {
-        marginVertical: 30,
-        height: 1,
-        width: "80%",
     },
 });

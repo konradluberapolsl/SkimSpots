@@ -17,7 +17,6 @@ export const PlaceProvider: React.FC = ({ children }) => {
     return (
         <PlaceContext.Provider
             value={{
-                //TODO: XD przy takim rozwiązaniu tabela userPlaces staje się zbędzna, ale jakby dodać autentyfikację byłaby potrzebna
                 userPlaces,
                 get: () => {
                     //TODO: Może i tak pytać bazę czy nie ma zmian? - porównywać odpowiedz z JSONem

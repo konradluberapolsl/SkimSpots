@@ -18,7 +18,6 @@ const VisitedPlacesScreen = (props: OwnProps) => {
     const handleOnPressItem = (place : Place) => {
         props.navigation.navigate("PlaceDetailsScreen", { place: place!! });
     }
-
     const { userPlaces } = React.useContext(PlaceContext);
 
     const renderItem = ( {item} : any ) => (
@@ -26,9 +25,6 @@ const VisitedPlacesScreen = (props: OwnProps) => {
             place={item.place}
             onPress={() => handleOnPressItem(item.place)} />
     );
-
-    console.log(userPlaces);
-
 
     return (
         <SafeAreaView style={{flex: 1, }}>
