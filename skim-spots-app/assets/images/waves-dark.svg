@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 248.96 212.72">
+    <defs>
+        <style>.cls-1{opacity:0.41;fill:url(#Gradient_bez_nazwy_6);}.cls-2,.cls-3{opacity:0.44;}.cls-2{fill:url(#Gradient_bez_nazwy_6-2);}.cls-3{fill:url(#Gradient_bez_nazwy_6-3);}</style>
+    <linearGradient id="Gradient_bez_nazwy_6" y1="120.17" x2="248.96" y2="120.17" gradientUnits="userSpaceOnUse"><stop offset="0.01" stop-color="#c08d87"/><stop offset="1" stop-color="#312f64"/>
+    </linearGradient><linearGradient id="Gradient_bez_nazwy_6-2" y1="106.36" x2="248.91" y2="106.36" xlink:href="#Gradient_bez_nazwy_6"/>
+        <linearGradient id="Gradient_bez_nazwy_6-3" y1="130.9" x2="248.88" y2="130.9" xlink:href="#Gradient_bez_nazwy_6"/>
+    </defs><g id="Warstwa_2"><g id="Warstwa_1-2"><path class="cls-1" d="M0,27.63S4.79,56.8,27,56.48c38-.54,70.3-5.18,81.4,19.24s7.4,64.38,29.6,72.52,39.95-37,70.29-45.88c22.3-6.53,40.64,22.2,40.64,22.2l-.08,88.16H0Z"/><path class="cls-2" d="M0,49.08V212.72H248.88s3.1-71.14-53.19-81.59c-43.67-8.11-65.25,18.81-91,11.19-40-11.84-51.8-77-57-99.16S32.91-10.11,0,3.21Z"/><path class="cls-3" d="M0,49.08V212.72H248.88S238,151.54,153.56,145.28c-19.85-1.47-17-17.76-42.91-44.4s-37.74,2.22-73.26-14.8C13.13,74.46,0,49.08,0,49.08Z"/></g></g></svg>
